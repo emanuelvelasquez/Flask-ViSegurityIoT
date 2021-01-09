@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="jumbotron text-center">
+    <h1 style="font-size: 4vh;">Camaras de Vigilacias</h1>
+    <!-- <p class="lead">Jumbo helper text</p> -->
+    <hr class="my-2">
+    <!-- <p>More info</p> -->
+    <br>
+    <div class="row justify-content-center align-items-center minh-100">
+         {% for cam in camIpLink %}
+        <div class="col-sm-6  mb-3">
+            <h5>{{ cam }}</h5>
+            <img src="{{ camIpLink[cam] }}" class="img-fluid shadow-lg" alt="">
+
+        </div>
+        {% endfor %}
+
+    </div>
+    
+</div>
+{% endblock  %}

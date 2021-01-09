@@ -1,0 +1,75 @@
+{% import "bootstrap/utils.html" as utils %}
+{% extends 'base.html' %}
+{% block blockname %}
+    Lista Usuarios
+{% endblock blockname %}
+
+{% block body %}
+    <div class="container text-center">
+        <div class="outer">
+        <div class="middle">
+            <div class="inner">
+            <br/>
+            {{ utils.flashed_messages() }}
+            <br/>
+            <h1 style="text-align:center;">Lista de Usuarios</h1>
+            {% if usuarios %}
+                <hr class="intro-divider">
+                <div class="center">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr class="text-center">
+                            <th width="15%"> Nombre </th>
+                            <th width="15%"> Apellido </th>
+                            <th width="15%"> Usuario </th>
+                            <th width="25%"> E-mail</th>
+                            <th width="15%"> Editar</th>
+                            <th width="15%"> Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for usuario in usuarios %}
+                            <tr>
+                                <td> {{ usuario.nombre }} </td>
+                               
+                                <td>
+                                    {{ usuario.apellido }} 
+                                </td>
+                                <td>
+                                    {{ usuario.username }} 
+                                </td>
+                                <td>
+                                    {{ usuario.email }} 
+                                </td>
+                                <th> 
+                                    <a class="btn btn-primary" href="{{ url_for('administrador.edita_usuario', id=usuario.id) }}">
+                                        <i class="fa fa-pencil"> </i> Editar
+                                    </a>
+                                </th>
+                                <th> 
+                                    <a class="btn btn-primary" href="{{ url_for('administrador.elimina_usuario', id=usuario.id) }}">
+                                        <i class="fa fa-trash"> </i> Eliminar
+                                    </a>
+                                </th>
+                            </tr>
+                       {% endfor %}
+                        </tbody>
+                </table>
+                </div>
+                <div style="text-align: center">
+            {% else %}
+                <div style="text-align: center">
+                <h3> No hay usuarios!!! </h3>
+                <hr class="intro-divider">
+            {% endif %}
+                <a href="{{ url_for('administrador.crear_usuario') }}" class="btn btn-primary btn-lg">
+                <i class="fa fa-plus"></i>
+                Crear Usuario
+                </a>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock  %}
+    

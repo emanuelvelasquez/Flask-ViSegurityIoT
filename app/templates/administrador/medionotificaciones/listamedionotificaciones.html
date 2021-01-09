@@ -1,0 +1,53 @@
+<!-- app/templates/administrador/roles/roles.html -->
+
+{% import "bootstrap/utils.html" as utils %}
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+  <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <br/>
+        {{ utils.flashed_messages() }}
+        <br/>
+        
+        <h1 style="text-align:center;">Medio - Usuarios</h1>
+        {% if medionotificacion %}
+          <hr class="intro-divider">
+          <div class="center">
+            <table class="table table-striped table-bordered text-center">
+              <thead>
+                <tr class="text-center">
+                  <th width="20%"> Nombre </th>
+                  <th width="40%"> Descripcion </th>
+                  <th width="40%"> Usuarios </th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for medio in medionotificacion %}
+                <tr>
+                  <td class="text-center"> {{ medio.name }} </td>
+                  <td class="text-center"> {{ medio.description }} </td>
+                  <td class="text-center"> 
+                    <a class="btn btn-primary" href="{{ url_for('administrador.medio_notificacion', id=medio.id) }}">
+                        <i class="fa fa-pencil"> </i> Ver Usuarios
+                    </a>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div style="text-align: center">
+        {% else %}
+          <div style="text-align: center">
+            <h3> No hay Medio de Notificacion Creados </h3>
+            <hr class="intro-divider">
+        {% endif %}
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

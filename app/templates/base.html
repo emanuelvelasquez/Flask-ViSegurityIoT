@@ -1,0 +1,133 @@
+<!-- app/templates/base.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>{{ title }} | Project Dream Team</title>
+  <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-primary pl-md-5 pr-md-5">
+    <a class="navbar-brand" href="#"><img src="../static/img/favicon.ico" alt="" style="width:3vh ;color:white"> Vi-SegurityIoT</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{{ url_for('home.homepage') }}">Home<span class="sr-only">(current)</span></a>
+        </li>
+        {% if current_user.is_authenticated %}
+      
+          {% if current_user.is_admin %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                aria-expanded="false">Usuarios</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{ url_for('administrador.lista_usuarios') }}">Usuarios</a>
+                <a class="dropdown-item" href="{{ url_for('administrador.lista_roles') }}">Roles</a>
+                <a class="dropdown-item" href="{{ url_for('administrador.lista_usuariorol') }}">Usuarios/Roles</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                aria-expanded="false">Notificaciones</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{ url_for('administrador.lista_medio_notificaciones') }}">Medio de Notificacion</a>
+                <!-- <a class="dropdown-item" href="{{ url_for('administrador.lista_roles') }}">Roles</a>
+                <a class="dropdown-item" href="{{ url_for('administrador.lista_usuariorol') }}">Usuarios/Roles</a> -->
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                aria-expanded="false">Vigilancia/Reconocimineto</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{ url_for('videostream.funciones') }}">Administrar Tarea</a>
+                <a class="dropdown-item" href="{{ url_for('videostream.lista_eventos') }}">Ver Eventos</a>
+                <a class="dropdown-item" href="{{ url_for('videostream.stream') }}">Camaras de Vigilancia</a>
+              </div>
+            </li>
+          {% else %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                aria-expanded="false">Vigilancia</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Ver Imagenes</a>
+                <a class="dropdown-item" href="#">Ver Video</a>
+                <a class="dropdown-item" href="#">Ver Eventos</a>
+              </div>
+            </li>
+          {% endif %}
+         
+        {% endif %}
+
+
+
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contacto</a>
+        </li>
+      </ul>
+      <div class="form-inline my-2 my-md-0">
+        <ul class="navbar-nav">
+          {% if current_user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}">Cerrar Sesion</a></li>
+            <li class="nav-item"><a class="nav-link">
+
+                {% if current_user.is_admin %}
+                  <i class="fa fa-user-cog"></i>
+                {% else %}
+                  <i class="fa fa-user"></i>
+                {% endif %}
+                Hola, {{ current_user.username }}!!!</a></li>
+          {% else %}
+
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.register') }}">Registrarse</a>
+          </li> -->
+          <li class="nav-item">
+            
+            <a class="nav-link" href="{{ url_for('auth.login') }}"><i class="fa fa-user"></i> Iniciar Sesion</a>
+          </li>
+
+          {% endif %}
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+  <div class="wrapper">
+    {% block body %}
+    {% endblock %}
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+    <script>
+      $(document).ready(function() {
+        //alert("prueba");
+        setTimeout(function(){
+          $(".alert").remove()
+        },5000)
+        
+      });
+    </script>
+
+    
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}404{% endblock %}
+{% block body %}
+<div class="jumbotron jumbotron-fluid text-center">
+    <div class="container">
+        <h1  style="font-size: 14rem;">:( 404</h1>
+        <hr class="my-2">
+            <h3>Recurso no econtrado!!!</h3>
+            <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{{url_for('home.homepage')}}" role="button">Pagina Principal</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

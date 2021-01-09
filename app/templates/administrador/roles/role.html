@@ -1,0 +1,30 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends "base.html" %}
+{% block title %}
+    {% if crar_role %}
+        Agregar Rol
+    {% else %}
+        Editar Rol
+    {% endif %}
+{% endblock %}
+{% block body %}
+<br>
+<div class="container-md">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container pl-sm-5 pr-sm-5">
+            {% if crear_rol %}
+              <h1 class="display-4">Agregar Rol</h1>
+            {% else %}
+              <h1 class="display-4">Editar Rol</h1>
+            {% endif %}
+
+      
+      <hr class="my-2">
+      <div class="offset-sm-1 col-sm-7">
+        {{ wtf.quick_form(form) }}
+      </div>
+    </div>
+  </div>
+ 
+</div>
+{% endblock %}

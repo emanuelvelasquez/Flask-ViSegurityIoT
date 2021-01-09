@@ -1,0 +1,83 @@
+<!-- app/templates/administrador/roles/roles.html -->
+
+{% import "bootstrap/utils.html" as utils %}
+{% extends "base.html" %}
+{% block title %}Medio-Usuarios{% endblock %}
+{% block body %}
+<div class="container">
+  <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <br />
+        {{ utils.flashed_messages() }}
+        <br />
+        <h1 style="text-align:center"> {{ title }} - Usuarios</h1>
+        {% if mediousuario %}
+        <hr class="intro-divider">
+        <div class="center">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr class="text-center">
+                <th width="25%"> Usuario </th>
+                <th width="35%"> Email </th>
+                <th width="40%"> Eliminar </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for usuario in mediousuario %}
+              <tr>
+                <td class="text-center"> {{ usuario[0] }} </td>
+                <td class="text-center"> {{ usuario[1] }} </td>
+                <td class="text-center">
+                  <a class="btn btn-primary" href="{{ url_for('administrador.elimina_usuario_medio',id=usuario[2], idmedio=usuario[3]) }}" >
+                    <i class="fa fa-trash"> </i> Quitar Usuario
+                  </a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div style="text-align: center">
+          {% else %}
+          <div style="text-align: center">
+            <h3> No hay Usuarios asociados a este Medio </h3>
+            <hr class="intro-divider">
+            {% endif %}
+
+            <div class="jumbotron">
+              <h2>Usuarios</h2>
+              <p class="lead">Jumbo helper text</p>
+              <form action="{{ url_for('administrador.usuario_medio_notificacion') }}" method="post">
+                {{ form.csrf_token }} 
+                  <input type="text" value="{{ form.idmedio.data }}" name="idmedio" hidden>
+
+                <div class="form-group">
+                  <label for="">Usuarios:</label>
+                  <div class="col col-6 offset-3">
+                    <select class="form-control" name="iduser" value="{{ form.iduser.data }}">
+                      
+                      {% if usuarios %} 
+                      <option value="">Seleccione un Usuario</option>
+                      {% for user in usuarios %}
+                      <option value="{{user.id}}">{{user.username}}</option>
+                      {% endfor %}
+                      {% else %}
+                      <option value="">No hay usuarios</option>
+                      
+                      {% endif %}
+                     
+                    </select>
+                  </div>
+                </div>
+                <input name="submit" type="submit" value="Agregar Usuario" class="btn btn-primary btn-lg" />
+              </form>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
