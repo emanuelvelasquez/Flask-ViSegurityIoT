@@ -25,7 +25,7 @@ def create_app(config_name):
         app.config.update(
             SECRET_KEY = 'p9Bv<3Eid9%$i01',
             #SQLALCHEMY_DATABASE_URI = 'mysql://sami2318:sami2318@localhost/VI-SEGURITY-db'
-            SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://visegurityiot202:Sami2318@visegurityiot2020.mysql.pythonanywhere-services.com/visegurityiotdb2',
+            SQLALCHEMY_DATABASE_URI = 'mysql://upvisegurityiot:Sami2318@upvisegurityiot.mysql.pythonanywhere-services.com/visegurityiotdb',
             MAIL_SERVER = 'smtp.gmail.com',
             MAIL_PORT = 465,
             MAIL_USERNAME = 'visegurityiot@gmail.com',
