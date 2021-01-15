@@ -20,10 +20,25 @@ mail=Mail()
 #sched = BackgroundScheduler(daemon=True)
 
 def create_app(config_name):
-    print(config_name)
-    app = Flask(__name__, instance_relative_config=True)
-    app.config.from_object(app_config[config_name])
-    app.config.from_pyfile('config.py')
+    if os.getenv('FLASK_CONFIG') == "production":
+        app = Flask(__name__)
+        app.config.update(
+            SECRET_KEY = 'p9Bv<3Eid9%$i01',
+            #SQLALCHEMY_DATABASE_URI = 'mysql://sami2318:sami2318@localhost/VI-SEGURITY-db'
+            SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://visegurityiot202:Sami2318@visegurityiot2020.mysql.pythonanywhere-services.com/visegurityiotdb2',
+            MAIL_SERVER = 'smtp.gmail.com',
+            MAIL_PORT = 465,
+            MAIL_USERNAME = 'visegurityiot@gmail.com',
+            MAIL_PASSWORD = 'jfvdxflqqrxwpwbi',
+            DONT_REPLY_FROM_EMAIL = '(Vi-Segurity-IoT, visegurityiot@gmail.com)',
+            MAIL_USE_SSL= True,
+            MAIL_USE_TLS = False
+
+        )
+    else:
+        app = Flask(__name__, instance_relative_config=True)
+        app.config.from_object(app_config[config_name])
+        app.config.from_pyfile('config.py')
 
     db.init_app(app)
    
