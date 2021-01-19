@@ -23,9 +23,8 @@ def create_app(config_name):
     if os.getenv('FLASK_CONFIG') == "production":
         app = Flask(__name__)
         app.config.update(
-            SECRET_KEY = 'p9Bv<3Eid9%$i01',
-            #SQLALCHEMY_DATABASE_URI = 'mysql://sami2318:sami2318@localhost/VI-SEGURITY-db'
-            SQLALCHEMY_DATABASE_URI = 'mysql://upvisegurityiot:Sami2318@upvisegurityiot.mysql.pythonanywhere-services.com/visegurityiotdb',
+            SECRET_KEY=os.getenv('SECRET_KEY'),
+            SQLALCHEMY_DATABASE_URI=os.getenv('SQLALCHEMY_DATABASE_URI'),
             MAIL_SERVER = 'smtp.gmail.com',
             MAIL_PORT = 465,
             MAIL_USERNAME = 'visegurityiot@gmail.com',

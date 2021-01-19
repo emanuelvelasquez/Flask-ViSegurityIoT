@@ -9,15 +9,14 @@
     {{ utils.flashed_messages() }}
 
     <div class="container">
-
         <h3>Administrar Tarea de Reconocimiento de las Camaras de Vigilancia</h3>
         <hr class="my-1">
-        <p>Reconoce de Personas y Autos de los videos captadas por las camaras, si se detecta alguno de estos objetos se
+        <p>Reconocimiento de Personas y Autos de los videos captados por las camaras, si se detecta alguno de estos objetos se
             enviara una notificacion a los usuarios segun haya sido configurados las notificaciones.</p>
         <h4 class="color: #aec251"><b><u>Estado de la Tarea</u></b></h4>
         <div class="w-100"></div><br>
         <div class="row text-center">
-        
+
         {% if funcion.corriendo>0 %}
             <div class="col-6" style="border-right: 1px solid #c6c7c7 !important">
                 <h3 style="color: #2c3e50"><b>Corriendo</b></h3>
@@ -35,12 +34,12 @@
         {% endif %}
         <hr class="w-100">
         </div>
-       
+
 
     </div>
     <div class="container">
 
-      
+
             <h3>Hora de Inicio y Fin Del Periodo de Ejecucion del Reconomiento de Objetos</h3>
             <hr class="my-2">
             <div class="offset-sm-1">
