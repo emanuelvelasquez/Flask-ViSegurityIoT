@@ -122,3 +122,15 @@ class Eventos(db.Model):
   
     def __repr__(self):
          return '<Eventos: {}>'.format(self.evento)
+
+class Configuraciones(db.Model):
+    
+    __tablename__= "configuraciones"
+
+    id = db.Column(db.String, primary_key=True)
+    config = db.Column(db.String(100))
+    descripcion = db.Column(db.String(100))
+   
+  
+    def __repr__(self):
+         return '<Configuraciones: {}>'.format(self.config)
