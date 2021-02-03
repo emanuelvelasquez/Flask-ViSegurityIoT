@@ -79,25 +79,25 @@ class MedioNotificacion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), unique=True)
     description = db.Column(db.String(200))
-    
+
 
     def __repr__(self):
          return '<MedioNotificacion: {}>'.format(self.name)
 
 class UsuarioNotificacion(db.Model):
-    
+
     __tablename__= "usuarionotificacion"
 
     id = db.Column(db.Integer, primary_key=True)
     usuario_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'))
     medionotificacion_id = db.Column(db.Integer, db.ForeignKey('medionotificaciones.id'))
     notificado = db.Column(db.Boolean, default=False)
-  
+
     def __repr__(self):
          return '<UsuarioNotificacion: {}>'.format(self.usuario_id)
 
 class Funciones(db.Model):
-    
+
     __tablename__= "funciones"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -105,12 +105,12 @@ class Funciones(db.Model):
     corriendo = db.Column(db.Boolean, default=False)
     inicio = db.Column(db.Integer)
     fin = db.Column(db.Integer)
-  
+
     def __repr__(self):
          return '<Funciones: {}>'.format(self.funcion)
 
 class Eventos(db.Model):
-    
+
     __tablename__= "eventos"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -118,19 +118,20 @@ class Eventos(db.Model):
     hora = db.Column(db.DateTime, default=datetime.datetime.now)
     path = db.Column(db.String(100))
     revisado = db.Column(db.Boolean, default=False)
- 
-  
+
+
     def __repr__(self):
          return '<Eventos: {}>'.format(self.evento)
 
 class Configuraciones(db.Model):
-    
+
     __tablename__= "configuraciones"
 
-    id = db.Column(db.String, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(100))
     config = db.Column(db.String(100))
     descripcion = db.Column(db.String(100))
-   
-  
+
+
     def __repr__(self):
          return '<Configuraciones: {}>'.format(self.config)
