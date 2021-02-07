@@ -20,7 +20,7 @@ camIpLink = {
     }
 
 
-@videostream.route('/videostream/stream/<string=id_cam>', methods=['GET'])
+@videostream.route('/videostream/stream/<string:id_cam>', methods=['GET'])
 @login_required
 def stream(id_cam):
     
