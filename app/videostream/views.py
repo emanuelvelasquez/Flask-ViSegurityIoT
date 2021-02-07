@@ -3,21 +3,14 @@ from flask_login import login_required, current_user
 from . import videostream
 from ..models import Funciones, Eventos, Configuraciones
 from .forms import FuncionForm
-from .. import db, mail #, sched
-#from ..common.telegram_send import Send_Telegram, Send_Mensaje
-#import cv2
+from .. import db, mail 
 import time
-#from ..camaras.getvideo import get_video
-#from .. import camaras
+import requests
+
 
 def chequeo_admin():
     if not current_user.is_admin:
         abort(403)
-
-camIpLink = {
-             "Frente",#camara numero 1
-             "Porton"#camara numero 2
-    }
 
 
 @videostream.route('/videostream/stream/<string:id_cam>', methods=['GET'])
@@ -46,22 +39,19 @@ def funciones():
 def iniciar_fin(inicia):
     chequeo_admin()
     funcion = Funciones.query.get_or_404(1)
+    link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config + '/videostream/iniciar_fin/' +  inicia
+
     if inicia == "True":
         funcion.corriendo = 1
 
-        for id_cam in camIpLink:
-            
-            #sched.add_job(func=tensorflow, trigger='cron', args=[id_cam, funcion.fin], minute=funcion.inicio, id=id_cam)
-
-            time.sleep(2)
+        iniciado = requests.post(link_ngrok)
 
         msg = 'Se Inicio el Reconocimiento de Objetos!!!'
 
     else:
         funcion.corriendo = 0
-        # jobss=sched.get_jobs().count()
-        #sched.remove_all_jobs()
-        # sched.shutdown()
+        iniciado = requests.post(link_ngrok)
+
         msg = 'Se Detuvo el Reconocimiento de Objetos!!!'
 
     db.session.commit()
