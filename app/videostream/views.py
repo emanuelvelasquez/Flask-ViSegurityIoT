@@ -1,7 +1,7 @@
 from flask import render_template, abort, Response, Flask, redirect, url_for, flash, request, current_app
 from flask_login import login_required, current_user
 from . import videostream
-from ..models import Funciones, Eventos
+from ..models import Funciones, Eventos, Configuraciones
 from .forms import FuncionForm
 from .. import db, mail #, sched
 #from ..common.telegram_send import Send_Telegram, Send_Mensaje
