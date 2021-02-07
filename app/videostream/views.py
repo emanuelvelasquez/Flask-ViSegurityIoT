@@ -44,13 +44,14 @@ def iniciar_fin(inicia):
     if inicia == "True":
         funcion.corriendo = 1
 
-        iniciado = requests.post(link_ngrok)
+        iniciado = requests.get(link_ngrok)
 
         msg = 'Se Inicio el Reconocimiento de Objetos!!!'
 
     else:
         funcion.corriendo = 0
-        iniciado = requests.post(link_ngrok)
+        
+        iniciado = requests.get(link_ngrok)
 
         msg = 'Se Detuvo el Reconocimiento de Objetos!!!'
 
