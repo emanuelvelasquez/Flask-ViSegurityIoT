@@ -31,7 +31,7 @@
           {% if current_user.is_admin %}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                aria-expanded="false">Usuarios</a>
+                aria-expanded="false">Usuarios/Roles</a>
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="{{ url_for('administrador.lista_usuarios') }}">Usuarios</a>
                 <a class="dropdown-item" href="{{ url_for('administrador.lista_roles') }}">Roles</a>
@@ -40,33 +40,27 @@
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                aria-expanded="false">Notificaciones</a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ url_for('administrador.lista_medio_notificaciones') }}">Medio de Notificacion</a>
-                <!-- <a class="dropdown-item" href="{{ url_for('administrador.lista_roles') }}">Roles</a>
-                <a class="dropdown-item" href="{{ url_for('administrador.lista_usuariorol') }}">Usuarios/Roles</a> -->
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                 aria-expanded="false">Vigilancia/Reconocimineto</a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ url_for('videostream.funciones') }}">Administrar Tarea</a>
+                <a class="dropdown-item" href="{{ url_for('videostream.funciones') }}">Administrar Funcion</a>
                 <a class="dropdown-item" href="{{ url_for('videostream.lista_eventos') }}">Ver Eventos</a>
-                <a class="dropdown-item" href="{{ url_for('videostream.stream') }}">Camaras de Vigilancia</a>
+                <a class="dropdown-item" href="{{ url_for('videostream.lista_medio_notificaciones') }}">Medio de Notificacion</a>
               </div>
             </li>
-          {% else %}
+            
+          {% endif %}
+            
+        
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                aria-expanded="false">Vigilancia</a>
+                aria-expanded="false">Camaras</a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Ver Imagenes</a>
-                <a class="dropdown-item" href="#">Ver Video</a>
-                <a class="dropdown-item" href="#">Ver Eventos</a>
+                <a class="dropdown-item" href="{{ url_for('videostream.stream',id_cam='porton') }}">Porton</a>
+                <a class="dropdown-item" href="{{ url_for('videostream.stream',id_cam='frente') }}">Frente</a>
+                <a class="dropdown-item" href="{{ url_for('videostream.stream',id_cam='entrada principal') }}">Entrada Principal</a>
               </div>
             </li>
-          {% endif %}
+        
          
         {% endif %}
 

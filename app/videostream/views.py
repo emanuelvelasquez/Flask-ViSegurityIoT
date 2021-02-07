@@ -20,16 +20,14 @@ camIpLink = {
     }
 
 
-@videostream.route('/videostream/stream')
+@videostream.route('/videostream/stream/<string=id_cam>', methods=['GET'])
 @login_required
-def stream():
-    camIpLink = {
+def stream(id_cam):
+    
+    link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config + '/videostream/get_video/' + id_cam
 
-        "Frente": "http://10.42.0.114/mjpeg/1",  # camara numero 1
-        "Porton": "http://10.42.0.143/mjpeg/1"  # camara numero 2
-    }
 
-    return render_template('videostream/stream.html', camIpLink=camIpLink, title='Video Stream', jaje="asdasd")
+    return render_template('videostream/stream.html', link=link_ngrok, title=id_cam.upper())
 
 
 @videostream.route('/videostream/funciones')
