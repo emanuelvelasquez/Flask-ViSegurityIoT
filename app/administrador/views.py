@@ -284,7 +284,8 @@ def elimina_usuario_medio(id,idmedio):
     usuariomedio= UsuarioNotificacion.query.get_or_404(id)
     db.session.delete(usuariomedio)
     usuario= Usuario.query.filter_by(id=id).first()
-    usuario.id_telegram=None
+    usuario.id_telegram=''
+
     db.session.commit()
     flash('Se quito correctamente el Usuario de este Medio')
     return redirect(url_for('administrador.medio_notificacion',id=idmedio))
