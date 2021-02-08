@@ -1,7 +1,7 @@
 # app/admin/forms.py
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, ValidationError,PasswordField, HiddenField, IntegerField
+from wtforms import StringField, SubmitField, ValidationError,PasswordField, HiddenField, IntegerField ,BooleanField
 from wtforms.validators import DataRequired, Email, EqualTo
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
@@ -47,6 +47,9 @@ class UsuarioEditaForm(FlaskForm):
     username = StringField('Nombre de Usuario', validators=[DataRequired()])
     nombre = StringField('Nombre', validators=[DataRequired()])
     apellido = StringField('Apellido', validators=[DataRequired()])
+    is_admin = BooleanField('Administrador',default=False,validators=[DataRequired])
+    id_telegram = StringField('Cuenta Telegram')
+
     submit = SubmitField('Guardar')
 
 class MedioNotificacionForm(FlaskForm):
