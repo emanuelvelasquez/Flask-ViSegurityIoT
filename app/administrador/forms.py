@@ -47,6 +47,7 @@ class UsuarioEditaForm(FlaskForm):
     username = StringField('Nombre de Usuario', validators=[DataRequired()])
     nombre = StringField('Nombre', validators=[DataRequired()])
     apellido = StringField('Apellido', validators=[DataRequired()])
+    id_telegram = StringField('Id Telegram')
     submit = SubmitField('Guardar')
 
 class MedioNotificacionForm(FlaskForm):
