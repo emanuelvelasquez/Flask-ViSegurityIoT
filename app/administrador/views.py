@@ -283,10 +283,9 @@ def elimina_usuario_medio(id,idmedio):
 
     usuariomedio= UsuarioNotificacion.query.get_or_404(id)
     db.session.delete(usuariomedio)
-    db.session.commit()
 
-    usuario= Usuario.query.get_or_404(id)
-    usuario.id_telegram=''
+    usuario = Usuario.query.get_or_404(id)
+    usuario.id_telegram=None
     db.session.commit()
 
     flash('Se quito correctamente el Usuario de este Medio')
