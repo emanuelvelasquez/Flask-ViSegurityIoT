@@ -47,7 +47,7 @@ class UsuarioEditaForm(FlaskForm):
     username = StringField('Nombre de Usuario', validators=[DataRequired()])
     nombre = StringField('Nombre', validators=[DataRequired()])
     apellido = StringField('Apellido', validators=[DataRequired()])
-    is_admin = BooleanField('Administrador',validators=[DataRequired])
+    is_admin = BooleanField('Administrador')
     id_telegram = StringField('Cuenta Telegram')
 
     submit = SubmitField('Guardar')
