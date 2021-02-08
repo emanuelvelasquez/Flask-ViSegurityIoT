@@ -144,7 +144,6 @@ def edita_usuario(id):
         usuario.nombre = form.nombre.data
         usuario.apellido = form.apellido.data
         usuario.email = form.email.data
-        usuario.id_telegram=form.id_telegram.data
         
         db.session.commit()
         flash("Se edito Correctamente el Usuario!!!")
@@ -155,7 +154,7 @@ def edita_usuario(id):
     form.nombre.data = usuario.nombre
     form.apellido.data = usuario.apellido
     form.email.data = usuario.email
-    form.id_telegram = usuario.id_telegram
+    
     return render_template('administrador/usuarios/usuario.html',crear_usuario=crear_usuario,form=form,title="Editar Usuario" )
     
 
