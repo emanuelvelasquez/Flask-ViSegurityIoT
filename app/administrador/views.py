@@ -127,7 +127,7 @@ def asigna_usuariorol(id):
 @administrador.route('/usuarios')
 def lista_usuarios():
     #filtro los usuarios que son administradores
-    usuarios = Usuario.query.filter_by(is_admin=False).all()
+    usuarios = Usuario.query.all()
     return render_template('administrador/usuarios/usuarios.html',usuarios=usuarios, title=' Lista Usuarios')
 
 @administrador.route('/usuarios/edita/<int:id>', methods=['GET', 'POST'])
