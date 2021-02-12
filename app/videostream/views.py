@@ -39,19 +39,31 @@ def funciones():
 def iniciar_fin(inicia):
     chequeo_admin()
     funcion = Funciones.query.get_or_404(1)
-    link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config + '/videostream/iniciar_fin/' +  inicia
+    link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config + '/videostream/iniciar_fin'
 
     if inicia == "True":
         funcion.corriendo = 1
+        data={
+            'inicia': True,
+            'usu_telegram':[]
+       }
+        Usuario_Telegram = UsuarioNotificacion.query.filter_by(medionotificacion_id=2)
+        for i in Usuario_Telegram:
+            usu = Usuario.query.get_or_404(i.usuario_id)
+            if usu.id_telegram is not None and usu.id_telegram != '':
 
-        iniciado = requests.get(link_ngrok)
+                i=data['usu_telegram'].append(dict(id_telegram=usu.id_telegram))
+
+        iniciado = requests.get(link_ngrok, json=data)
 
         msg = 'Se Inicio el Reconocimiento de Objetos!!!'
 
     else:
         funcion.corriendo = 0
-        
-        iniciado = requests.get(link_ngrok)
+        data={
+            'inicia': False,
+        }
+        iniciado = requests.get(link_ngrok,json=data)
 
         msg = 'Se Detuvo el Reconocimiento de Objetos!!!'
 
@@ -59,6 +71,7 @@ def iniciar_fin(inicia):
 
     flash(msg)
     return redirect(url_for('videostream.funciones'))
+    
 
 
 @videostream.route('/periodo', methods=['POST'])
