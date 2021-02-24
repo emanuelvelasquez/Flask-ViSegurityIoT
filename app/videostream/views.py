@@ -45,14 +45,14 @@ def iniciar_fin(inicia):
         funcion.corriendo = 1
         data={
             'inicia': True,
-            'usu_telegram':[]
+            #'usu_telegram':[]
        }
-        Usuario_Telegram = UsuarioNotificacion.query.filter_by(medionotificacion_id=2)
-        for i in Usuario_Telegram:
-            usu = Usuario.query.get_or_404(i.usuario_id)
-            if usu.id_telegram is not None and usu.id_telegram != '':
+        # Usuario_Telegram = UsuarioNotificacion.query.filter_by(medionotificacion_id=2)
+        # for i in Usuario_Telegram:
+        #     usu = Usuario.query.get_or_404(i.usuario_id)
+        #     if usu.id_telegram is not None and usu.id_telegram != '':
 
-                i=data['usu_telegram'].append(dict(id_telegram=usu.id_telegram))
+        #         i=data['usu_telegram'].append(dict(id_telegram=usu.id_telegram))
 
         iniciado = requests.get(link_ngrok, json=data)
 
