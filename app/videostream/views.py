@@ -6,7 +6,7 @@ from .forms import FuncionForm
 from .. import db, mail 
 import time
 import requests
-
+from requests.auth import HTTPBasicAuth 
 
 def chequeo_admin():
     if not current_user.is_admin:
@@ -40,6 +40,8 @@ def iniciar_fin(inicia):
     chequeo_admin()
     funcion = Funciones.query.get_or_404(1)
     link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config + '/videostream/iniciar_fin'
+    usu=Configuraciones.query.filter_by(nombre='user-ngrok').first().config
+    contra=Configuraciones.query.filter_by(nombre='pass-ngrok').first().config
 
     if inicia == "True":
         funcion.corriendo = 1
@@ -54,7 +56,6 @@ def iniciar_fin(inicia):
 
         #         i=data['usu_telegram'].append(dict(id_telegram=usu.id_telegram))
 
-        iniciado = requests.get(link_ngrok, json=data)
 
         msg = 'Se Inicio el Reconocimiento de Objetos!!!'
 
@@ -63,9 +64,11 @@ def iniciar_fin(inicia):
         data={
             'inicia': False,
         }
-        iniciado = requests.get(link_ngrok,json=data)
 
         msg = 'Se Detuvo el Reconocimiento de Objetos!!!'
+
+    iniciado = requests.get(link_ngrok, json=data,auth=HTTPBasicAuth(usu,contra))
+
 
     db.session.commit()
 
