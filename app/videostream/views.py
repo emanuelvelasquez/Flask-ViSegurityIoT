@@ -67,7 +67,7 @@ def iniciar_fin(inicia):
 
         msg = 'Se Detuvo el Reconocimiento de Objetos!!!'
 
-    iniciado = requests.get(link_ngrok, json=data,auth=HTTPBasicAuth(usu,contra))
+    iniciado = requests.get(link_ngrok, json=data)#,auth=HTTPBasicAuth(usu,contra))
 
 
     db.session.commit()
