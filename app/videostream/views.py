@@ -89,16 +89,24 @@ def iniciar_fin(inicia):
 @videostream.route('/periodo', methods=['POST'])
 @login_required
 def periodo():
-    chequeo_admin()
-    form = request.form
-    funcion = Funciones.query.get_or_404(1)
-    funcion.inicio = form['inicio']
-    funcion.fin = form['fin']
-    db.session.commit()
+    hecho = True
 
-    msg = 'Se modifico exitosamente los periodos de Monitoreo!!!'
-    flash(msg)
-    return redirect(url_for('videostream.funciones'))
+    while hecho:
+        try:
+            chequeo_admin()
+            form = request.form
+            funcion = Funciones.query.get_or_404(1)
+            funcion.inicio = form['inicio']
+            funcion.fin = form['fin']
+            db.session.commit()
+            hecho=False
+            msg = 'Se modifico exitosamente los periodos de Monitoreo!!!'
+            flash(msg)
+            return redirect(url_for('videostream.funciones'))
+
+        except Exception as e:
+            abort(500)
+
 
 @videostream.route('/listaeventos')
 def lista_eventos():
