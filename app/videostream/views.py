@@ -37,43 +37,51 @@ def funciones():
 @videostream.route('/iniciarfin/<string:inicia>')
 @login_required
 def iniciar_fin(inicia):
-    chequeo_admin()
-    funcion = Funciones.query.get_or_404(1)
-    link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config + '/videostream/iniciar_fin'
-    usu=Configuraciones.query.filter_by(nombre='user-ngrok').first().config
-    contra=Configuraciones.query.filter_by(nombre='pass-ngrok').first().config
+    hecho = True
 
-    if inicia == "True":
-        funcion.corriendo = 1
-        data={
-            'inicia': True,
-            #'usu_telegram':[]
-       }
-        # Usuario_Telegram = UsuarioNotificacion.query.filter_by(medionotificacion_id=2)
-        # for i in Usuario_Telegram:
-        #     usu = Usuario.query.get_or_404(i.usuario_id)
-        #     if usu.id_telegram is not None and usu.id_telegram != '':
+    while hecho:
+        try:
+            chequeo_admin()
+            funcion = Funciones.query.get_or_404(1)
+            link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config + '/videostream/iniciar_fin'
+            usu=Configuraciones.query.filter_by(nombre='user-ngrok').first().config
+            contra=Configuraciones.query.filter_by(nombre='pass-ngrok').first().config
 
-        #         i=data['usu_telegram'].append(dict(id_telegram=usu.id_telegram))
+            if inicia == "True":
+                funcion.corriendo = 1
+                data={
+                    'inicia': True,
+                    #'usu_telegram':[]
+                }
+                # Usuario_Telegram = UsuarioNotificacion.query.filter_by(medionotificacion_id=2)
+                # for i in Usuario_Telegram:
+                #     usu = Usuario.query.get_or_404(i.usuario_id)
+                #     if usu.id_telegram is not None and usu.id_telegram != '':
 
-
-        msg = 'Se Inicio el Reconocimiento de Objetos!!!'
-
-    else:
-        funcion.corriendo = 0
-        data={
-            'inicia': False,
-        }
-
-        msg = 'Se Detuvo el Reconocimiento de Objetos!!!'
-
-    iniciado = requests.get(link_ngrok, json=data)#,auth=HTTPBasicAuth(usu,contra))
+                #         i=data['usu_telegram'].append(dict(id_telegram=usu.id_telegram))
 
 
-    db.session.commit()
+                msg = 'Se Inicio el Reconocimiento de Objetos!!!'
 
-    flash(msg)
-    return redirect(url_for('videostream.funciones'))
+            else:
+                funcion.corriendo = 0
+                data={
+                    'inicia': False,
+                }
+
+                msg = 'Se Detuvo el Reconocimiento de Objetos!!!'
+
+            iniciado = requests.get(link_ngrok, json=data)#,auth=HTTPBasicAuth(usu,contra))
+
+
+            db.session.commit()
+            hecho=False
+            flash(msg)
+            return redirect(url_for('videostream.funciones'))
+            
+        except Exception as e:
+            abort(500)
+
     
 
 
