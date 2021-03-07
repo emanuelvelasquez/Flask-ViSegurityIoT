@@ -71,8 +71,9 @@ def iniciar_fin(inicia):
 
                 msg = 'Se Detuvo el Reconocimiento de Objetos!!!'
 
-            iniciado = requests.get(link_ngrok, json=data)#,auth=HTTPBasicAuth(usu,contra))
-
+            result = requests.get(link_ngrok, json=data)#,auth=HTTPBasicAuth(usu,contra))
+            if result.status_code != 200:
+                abort(result.status_code)
 
             db.session.commit()
             hecho=False
