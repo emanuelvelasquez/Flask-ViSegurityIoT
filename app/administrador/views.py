@@ -118,9 +118,9 @@ def asigna_usuariorol(id):
         db.session.commit()
 
         usu = Usuario.query.get_or_404(id)
-       
+        formi = UsuarioEditaForm(objet=usu)
 
-        if form.role.data==1:
+        if form.role.data.id==1:
             usu.is_admin =1
         else:
             usu.is_admin=0
@@ -154,8 +154,8 @@ def edita_usuario(id):
         usuario.nombre = form.nombre.data
         usuario.apellido = form.apellido.data
         usuario.email = form.email.data
-        usuario.is_admin =form.is_admin.data
-        usuario.id_telegram = form.id_telegram.data
+        # usuario.is_admin =form.is_admin.data
+        # usuario.id_telegram = form.id_telegram.data
         db.session.commit()
         flash("Se edito Correctamente el Usuario!!!")
 
