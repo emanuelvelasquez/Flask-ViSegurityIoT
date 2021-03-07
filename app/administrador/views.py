@@ -165,8 +165,8 @@ def edita_usuario(id):
     form.nombre.data = usuario.nombre
     form.apellido.data = usuario.apellido
     form.email.data = usuario.email
-    form.is_admin.data = usuario.is_admin
-    form.id_telegram.data = usuario.id_telegram
+    # form.is_admin.data = usuario.is_admin
+    # form.id_telegram.data = usuario.id_telegram
     return render_template('administrador/usuarios/usuario.html',crear_usuario=crear_usuario,form=form,title="Editar Usuario" )
     
 
