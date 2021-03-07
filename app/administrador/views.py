@@ -115,9 +115,13 @@ def asigna_usuariorol(id):
         usuario.role=form.role.data
         
         db.session.add(usuario)
+        db.session.commit()
+
         usu = Usuario.query.get_or_404(id)
+       
+
         if form.role.data==1:
-            usu.is_admin=1
+            usu.is_admin =1
         else:
             usu.is_admin=0
         db.session.commit()
