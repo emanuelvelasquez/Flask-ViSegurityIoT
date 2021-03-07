@@ -113,11 +113,13 @@ def asigna_usuariorol(id):
     form= UsuarioAsignaForm(obj=usuario)
     if form.validate_on_submit():
         usuario.role=form.role.data
-        if form.role.data==1:
-            usuario.is_admin=1
-        else:
-            usuario.is_admin=0
+        
         db.session.add(usuario)
+        usu = Usuario.query.get_or_404(id)
+        if form.role.data==1:
+            usu.is_admin=1
+        else:
+            usu.is_admin=0
         db.session.commit()
         flash("Se asisgno el rol correctamente!!!")
 
