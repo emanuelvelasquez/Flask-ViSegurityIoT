@@ -19,10 +19,12 @@
     
 </div>
 <script type="text/javascript">    
-
-    $("img").on("load",function () {
+    $(document).on("ready",function(){
+        $("img").on("error",function () {
         alert("asdad");
       });
+    } );
+    
 
 </script>
 {% endblock  %}
