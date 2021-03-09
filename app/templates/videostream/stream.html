@@ -26,8 +26,8 @@
             $(this).attr("src","../../static/img/loading.gif")
         });
         $("#video").on("error",function () {
-            $(this).attr("src","../../static/img/404.gif")
-      },2000);
+            $(this).delay(2000).attr("src","../../static/img/404.gif")
+      });
     } );
     
 
