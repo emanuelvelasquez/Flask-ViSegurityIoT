@@ -23,13 +23,13 @@
 <body>
   <div class="row position-fixed justify-content-center align-content-center h-100 w-100 bg-white" style="z-index:99999; margin-left:0;top:0;background-color: #0d0d0de6 !important" id="loader">
     <div class=" justify-content-center align-content-center text-center pb-5 pt-3" style="height:17rem;width:17rem;display:flex">
-        <img class="card-img img-fluid lodaer-img" src="../static/img/loading.gif" alt="Card image cap">
+        <img class="card-img img-fluid lodaer-img" src="{{ url_for('static', filename = 'img/loading.gif') }}" alt="Card image cap">
         <div class="loader"></div>
     </div>
 
   </div>
   <nav class="navbar navbar-expand-md navbar-dark bg-primary pl-md-5 pr-md-5">
-    <a class="navbar-brand" href="#"><img id="favi" src="../static/img/favicon.ico" alt="" style="width:3vh ;color:white"> Vi-SegurityIoT</a>
+    <a class="navbar-brand" href="#"><img id="favi" src="{{ url_for('static', filename = 'img/loading.gif') }}" alt="" style="width:3vh ;color:white"> Vi-SegurityIoT</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
