@@ -29,7 +29,7 @@
 
   </div>
   <nav class="navbar navbar-expand-md navbar-dark bg-primary pl-md-5 pr-md-5">
-    <a class="navbar-brand" href="#"><img id="favi" src="{{ url_for('static', filename = 'img/loading.gif') }}" alt="" style="width:3vh ;color:white"> Vi-SegurityIoT</a>
+    <a class="navbar-brand" href="#"><img id="favi" src="{{ url_for('static', filename = 'img/favicon.ico') }}" alt="" style="width:3vh ;color:white"> Vi-SegurityIoT</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -117,8 +117,7 @@
   </div>
  
     <script>
-       $("#favi").first().attr("src","../../static/img/favicon.ico");
-       $("#loader").find("img").attr("src","../../static/img/loading.gif");
+    
       $(window).on('load', function () {
        
         $('#loader').delay(300).fadeOut('fast');
