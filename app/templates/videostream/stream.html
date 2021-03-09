@@ -22,7 +22,7 @@
 
     $(document).ready(function(){
         $("img").first().attr("src","../../static/img/favicon.ico");
-        $("#video").on("error",function () {
+        $("#video").on("load",function () {
             $(this).attr("src","../../static/img/loading.gif")
         });
         $("#video").on("error",function () {
