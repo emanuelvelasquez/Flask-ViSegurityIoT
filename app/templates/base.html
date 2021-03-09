@@ -117,6 +117,8 @@
   </div>
  
     <script>
+       $("#favi").first().attr("src","../../static/img/favicon.ico");
+       $("#loader").find("img").attr("src","../../static/img/loading.ico");
       $(window).on('load', function () {
        
         $('#loader').delay(300).fadeOut('fast');
