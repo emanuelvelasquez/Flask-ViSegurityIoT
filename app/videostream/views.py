@@ -117,5 +117,13 @@ def lista_eventos():
 
     return render_template('videostream/eventos.html',eventos=eventos, title='Listado de Eventos')
 
+@videostream.route('/videostream/get_imagen', methods=['POST'])
+def get_imagen():
+    paths = json.loads(request.data)["path"]
+
+    linkngrok= Configuraciones.query.filter_by(nombre='ngrok').first().config
+    response = requests.post(linkngrok + "/videostream/jpg_get", data=json.dumps(paths),headers = {'content-type': 'application/json'})
+   
+    return Response(response)
 
     
