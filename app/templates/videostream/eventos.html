@@ -92,12 +92,12 @@ Lista de Eventos
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title" id="title"></h4>
+                <h4 class="modal-title " style="justify-content: center;" id="title"></h4>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
-                <img src="" alt="" id="CaptchaImg" style="width:100%">
+                <img src="{{ url_for('static', filename = 'img/loading.gif') }}" alt="" id="CaptchaImg" style="width:100%">
             </div>
 
             <!-- Modal footer -->
@@ -130,6 +130,10 @@ Lista de Eventos
     $(document).ready(function () {
 
             $('table').DataTable();
+            $('#myModal').on('hidden.bs.modal', function (e) {
+                $("#CaptchaImg").attr("src", "../../static/img/loading.gif");
+
+            });
     })
 </script>
 {% endblock %}
