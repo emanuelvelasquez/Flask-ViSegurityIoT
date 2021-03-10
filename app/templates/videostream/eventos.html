@@ -72,12 +72,11 @@ Lista de Eventos
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title" id="title"></h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
-                <img src="" alt="" id="CaptchaImg">
+                <img src="" alt="" id="CaptchaImg" style="width:100%">
             </div>
 
             <!-- Modal footer -->
@@ -100,7 +99,7 @@ Lista de Eventos
                 src = 'data:image/png;base64,' + response;
 
                 $("#CaptchaImg").attr("src", src);
-                $("#title").attr("html",cam+ " - "+hora);
+                $("#title").html(cam+ " - "+hora);
             },
 
 
