@@ -91,8 +91,8 @@ Lista de Eventos
         <div class="modal-content">
 
             <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title " style="justify-content: center;" id="title"></h4>
+            <div class="modal-header" style="justify-content: center;">
+                <h4 class="modal-title "  id="title"></h4>
             </div>
 
             <!-- Modal body -->
@@ -110,7 +110,7 @@ Lista de Eventos
 </div>
 <script>
     function cargaimg(path, cam, hora) {
-
+        $("#title").html(cam + " - " + hora);
         $.ajax({
             url: '/videostream/get_imagen',
             data: JSON.stringify({ path: "/home/pi/Documents/WebServer/Imagenes/frente/frente-06-Mar-2021-06:45:50.jpg" }),
