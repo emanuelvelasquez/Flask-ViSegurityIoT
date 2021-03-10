@@ -5,6 +5,9 @@ Lista de Eventos
 {% endblock blockname %}
 
 {% block body %}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.24/datatables.min.css" />
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.24/datatables.min.js"></script>
 <div class="container text-center">
     <div class="outer">
         <div class="middle">
@@ -16,7 +19,7 @@ Lista de Eventos
                 {% if eventos %}
                 <hr class="intro-divider">
                 <div class="center">
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered" >
                         <thead>
                             <tr class="text-center">
                                 <th width="20%"> # </th>
@@ -40,7 +43,8 @@ Lista de Eventos
                                     {{ evento.hora }}
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" onclick="cargaimg('{{ evento.path }}','{{ evento.evento }}','{{ evento.hora }}')"
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        onclick="cargaimg('{{ evento.path }}','{{ evento.evento }}','{{ evento.hora }}')"
                                         data-target="#myModal">
                                         Ver
                                     </button>
@@ -88,7 +92,7 @@ Lista de Eventos
     </div>
 </div>
 <script>
-    function cargaimg(path,cam,hora) {
+    function cargaimg(path, cam, hora) {
 
         $.ajax({
             url: '/videostream/get_imagen',
@@ -99,12 +103,16 @@ Lista de Eventos
                 src = 'data:image/png;base64,' + response;
 
                 $("#CaptchaImg").attr("src", src);
-                $("#title").html(cam+ " - "+hora);
+                $("#title").html(cam + " - " + hora);
             },
 
 
         });
 
     };
+    $(document).ready(function () {
+
+            $('table').DataTable();
+    })
 </script>
 {% endblock %}
