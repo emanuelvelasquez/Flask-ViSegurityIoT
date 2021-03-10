@@ -4,7 +4,7 @@ from . import videostream
 from ..models import Funciones, Eventos, Configuraciones, Usuario, UsuarioNotificacion
 from .forms import FuncionForm
 from .. import db, mail 
-import time
+import time, json
 import requests
 from requests.auth import HTTPBasicAuth 
 
