@@ -70,6 +70,8 @@
                 <a class="dropdown-item" href="{{ url_for('videostream.lista_eventos') }}">Ver Eventos</a>
               </div>
             </li>
+            
+            {% endif %}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                 aria-expanded="false">Camaras</a>
@@ -79,8 +81,6 @@
                 <a class="dropdown-item" href="{{ url_for('videostream.stream',id_cam='entrada principal') }}">Entrada Principal</a>
               </div>
             </li>
-            {% endif %}
-
 
         {% endif %}
 
