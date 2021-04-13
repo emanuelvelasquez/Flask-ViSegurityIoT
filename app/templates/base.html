@@ -61,7 +61,7 @@
               </div>
             </li>
 
-          {% endif %}
+          {% else %}
 
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
@@ -79,6 +79,7 @@
                 <a class="dropdown-item" href="{{ url_for('videostream.stream',id_cam='entrada principal') }}">Entrada Principal</a>
               </div>
             </li>
+            {% endif %}
 
 
         {% endif %}

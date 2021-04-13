@@ -17,7 +17,7 @@ def chequeo_admin():
 @login_required
 def stream(id_cam):
 
-    link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config + '/videostream/get_video/' + id_cam
+    link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config + '/videostream/' + id_cam
 
 
     return render_template('videostream/stream.html', link=link_ngrok, title=id_cam.upper())
