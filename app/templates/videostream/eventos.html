@@ -33,6 +33,7 @@ Lista de Eventos
                 {{ utils.flashed_messages() }}
                 <br />
                 <h1 style="text-align:center;">Listado de Eventos</h1>
+                {% set count = {'value': 1} %}
                 {% if eventos %}
                 <hr class="intro-divider">
                 <div class="center">
@@ -50,7 +51,7 @@ Lista de Eventos
                             <tr>
 
                                 <td>
-                                    {{ evento.id }}
+                                    {{count.value}}
                                 </td>
 
                                 <td>
@@ -68,6 +69,7 @@ Lista de Eventos
                                 </td>
 
                             </tr>
+                              {% if count.update({'value': (count.value + 1)}) %} {% endif %}
                             {% endfor %}
                         </tbody>
                     </table>
@@ -129,7 +131,28 @@ Lista de Eventos
     };
     $(document).ready(function () {
 
-            $('table').DataTable();
+            $('table').DataTable({
+                language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+    }
+            });
             $('#myModal').on('hidden.bs.modal', function (e) {
                 $("#CaptchaImg").attr("src", "../../static/img/loading.gif");
 

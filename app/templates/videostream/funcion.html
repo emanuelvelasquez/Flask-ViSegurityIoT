@@ -40,25 +40,46 @@
     <div class="container">
 
 
-            <h3>Hora de Inicio y Fin Del Periodo de Ejecucion del Reconomiento de Objetos</h3>
+            <h3>Hora de Inicio y Fin Del Periodo de Ejecucion del Reconocimiento de Objetos</h3>
             <hr class="my-2">
             <div class="offset-sm-1">
                 <form action="{{ url_for('videostream.periodo') }}" method="post">
                     {{ form.csrf_token }}
+                      {% if funcion.corriendo>0 %}
+                        <div class="form-group">
+                            <h4 class="color: #aec251"><b>Inicio:</b></h4>
+                            <div class="col col-6">
+                                <input type="number" name="inicio" value="{{ form.inicio }}" class="form-control" disabled>
+                            </div>
+                         </div>
+                        <div class="form-group">
+                            <h4 class="color: #aec251"><b>Fin:</b></h4>
+                            <div class="col col-6">
+                                <input type="number" name="fin" value="{{ form.fin }}" class="form-control" disabled>
+                            </div>
+                        </div>
+                        <input type="button" id="block" value="Guardar" class="btn btn-primary btn-lg"  data-toggle="tooltip" data-placement="top" title="No se puede editar el periodo, por que el RECONOCIMIENTO esta en ejecucion. Detenga el mismo para la edicion."/>
+                        <script>
+                            $(document).ready(function(){
+                                $("#block").tooltip('enable');
+                            });
+                        </script>
+                      {% else %}
+                         <div class="form-group">
+                            <h4 class="color: #aec251"><b>Inicio:</b></h4>
+                            <div class="col col-6">
+                                <input type="number" name="inicio" value="{{ form.inicio }}" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h4 class="color: #aec251"><b>Fin:</b></h4>
+                            <div class="col col-6">
+                                <input type="number" name="fin" value="{{ form.fin }}" class="form-control">
+                            </div>
+                        </div>
+                        <input name="submit" type="submit" value="Guardar" class="btn btn-primary btn-lg" />
+                      {% endif %}
 
-                    <div class="form-group">
-                        <h4 class="color: #aec251"><b>Inicio:</b></h4>
-                        <div class="col col-6">
-                            <input type="number" name="inicio" value="{{ form.inicio }}" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <h4 class="color: #aec251"><b>Fin:</b></h4>
-                        <div class="col col-6">
-                            <input type="number" name="fin" value="{{ form.fin }}" class="form-control">
-                        </div>
-                    </div>
-                    <input name="submit" type="submit" value="Guardar" class="btn btn-primary btn-lg" />
                 </form>
 
             </div>
@@ -66,4 +87,5 @@
 
     </div>
 </div>
+
 {% endblock %}

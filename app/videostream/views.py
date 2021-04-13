@@ -3,10 +3,10 @@ from flask_login import login_required, current_user
 from . import videostream
 from ..models import Funciones, Eventos, Configuraciones, Usuario, UsuarioNotificacion
 from .forms import FuncionForm
-from .. import db, mail 
+from .. import db, mail
 import time, json
 import requests
-from requests.auth import HTTPBasicAuth 
+from requests.auth import HTTPBasicAuth
 
 def chequeo_admin():
     if not current_user.is_admin:
@@ -16,7 +16,7 @@ def chequeo_admin():
 @videostream.route('/videostream/stream/<string:id_cam>', methods=['GET'])
 @login_required
 def stream(id_cam):
-    
+
     link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config + '/videostream/get_video/' + id_cam
 
 
@@ -79,11 +79,11 @@ def iniciar_fin(inicia):
             hecho=False
             flash(msg)
             return redirect(url_for('videostream.funciones'))
-            
+
         except Exception as e:
             abort(500)
 
-    
+
 
 
 @videostream.route('/periodo', methods=['POST'])
@@ -111,7 +111,7 @@ def periodo():
 @videostream.route('/listaeventos')
 def lista_eventos():
 
-    chequeo_admin()
+    #chequeo_admin()
     #cargo la lista de eventos
     eventos= Eventos.query.all()
 
@@ -123,7 +123,7 @@ def get_imagen():
 
     linkngrok= Configuraciones.query.filter_by(nombre='ngrok').first().config
     response = requests.post(linkngrok + "/videostream/jpg_get", data=json.dumps(paths),headers = {'content-type': 'application/json'})
-   
+
     return Response(response)
 
-    
+
