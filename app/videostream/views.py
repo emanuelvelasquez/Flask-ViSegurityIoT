@@ -69,7 +69,7 @@ def iniciar_fin(inicia):
 
                 msg = 'Se Detuvo el Reconocimiento de Objetos!!!'
 
-            result = requests.get(link_ngrok+inicia)#,auth=HTTPBasicAuth(usu,contra))
+            result = requests.post(link_ngrok+inicia)#,auth=HTTPBasicAuth(usu,contra))
             if result.status_code != 200:
                 abort(result.status_code)
 
