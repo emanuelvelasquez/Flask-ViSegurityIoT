@@ -43,16 +43,16 @@ def iniciar_fin(inicia):
         try:
             chequeo_admin()
             funcion = Funciones.query.get_or_404(1)
-            link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config + '/videostream/iniciar_fin'
+            link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config + '/reconocimiento/'
             usu=Configuraciones.query.filter_by(nombre='user-ngrok').first().config
             contra=Configuraciones.query.filter_by(nombre='pass-ngrok').first().config
 
             if inicia == "True":
                 funcion.corriendo = 1
-                data={
-                    'inicia': True,
+                
+                inicia= 'true'
                     #'usu_telegram':[]
-                }
+                
                 # Usuario_Telegram = UsuarioNotificacion.query.filter_by(medionotificacion_id=2)
                 # for i in Usuario_Telegram:
                 #     usu = Usuario.query.get_or_404(i.usuario_id)
@@ -65,13 +65,11 @@ def iniciar_fin(inicia):
 
             else:
                 funcion.corriendo = 0
-                data={
-                    'inicia': False,
-                }
+                inicia= 'true'
 
                 msg = 'Se Detuvo el Reconocimiento de Objetos!!!'
 
-            result = requests.get(link_ngrok, json=data)#,auth=HTTPBasicAuth(usu,contra))
+            result = requests.get(link_ngrok+inicia)#,auth=HTTPBasicAuth(usu,contra))
             if result.status_code != 200:
                 abort(result.status_code)
 
