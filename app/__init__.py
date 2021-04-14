@@ -27,9 +27,9 @@ def create_app(config_name):
             SQLALCHEMY_DATABASE_URI=os.getenv('SQLALCHEMY_DATABASE_URI'),
             MAIL_SERVER = 'smtp.gmail.com',
             MAIL_PORT = 465,
-            MAIL_USERNAME = 'visegurityiot@gmail.com',
-            MAIL_PASSWORD = 'jfvdxflqqrxwpwbi',
-            DONT_REPLY_FROM_EMAIL = '(Vi-Segurity-IoT, visegurityiot@gmail.com)',
+            MAIL_USERNAME = 'upvisegurityiot@gmail.com',
+            MAIL_PASSWORD = 'jjbpwfquckujwylq',
+            DONT_REPLY_FROM_EMAIL = '(ViSegurityIoT UP, upvisegurityiot@gmail.com)',
             MAIL_USE_SSL= True,
             MAIL_USE_TLS = False
 
@@ -40,17 +40,17 @@ def create_app(config_name):
         app.config.from_pyfile('config.py')
 
     db.init_app(app)
-   
+
     login_manager.init_app(app)
     login_manager.login_message = "Debes Iniciar Sesion!!!"
-    login_manager.login_view = "auth.login"    
+    login_manager.login_view = "auth.login"
 
     migrate = Migrate(app, db)
-    mail.init_app(app) 
+    mail.init_app(app)
     Bootstrap(app)
-    
+
     #sched.start()
-    
+
 
     from app import models
 
@@ -70,7 +70,7 @@ def create_app(config_name):
     @app.errorhandler(403)
     def forbidden(error):
         return render_template('errors/403.html',title="Error-403"),403
-    
+
     @app.errorhandler(404)
     def page_not_found(error):
         return render_template("errors/404.html", title=" Error-404"),404
@@ -78,5 +78,5 @@ def create_app(config_name):
     @app.errorhandler(500)
     def  error_server(error):
         return render_template('errors/500.html',title='Error-500'),500
-    
+
     return app

@@ -195,7 +195,7 @@ def crear_usuario():
                         text_body=f'Hola {form.nombre.data}, bienvenid@ al miniblog de Flask',
                         html_body=html)
 
-        flash("Se creo un Usuario correctamente!!!")
+        flash('Se creo el Usuario correctamente!!!')
         return redirect(url_for('administrador.lista_usuarios'))
 
     if len(form.errors)>0:
