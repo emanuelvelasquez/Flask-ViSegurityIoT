@@ -12,13 +12,13 @@ from .forms import RoleForm, UsuarioAsignaForm, UsuarioForm, UsuarioEditaForm, M
 
 def chequeo_admin():
     if not current_user.is_admin:
-        abort(403) 
+        abort(403)
 
 @administrador.route('/roles')
 @login_required
 def lista_roles():
     chequeo_admin()
-   
+
     roles = Role.query.all()
     return render_template('administrador/roles/roles.html',roles=roles, title='Roles')
 
@@ -26,7 +26,7 @@ def lista_roles():
 @administrador.route('/roles/crear', methods=['GET', 'POST'])
 @login_required
 def crear_role():
-    
+
     chequeo_admin()
 
     crear_rol = True
@@ -56,7 +56,7 @@ def crear_role():
 @login_required
 def edita_role(id):
     chequeo_admin()
- 
+
     crear_rol = False
 
     rol = Role.query.get_or_404(id)
@@ -90,7 +90,7 @@ def elimina_role(id):
     return redirect(url_for("administrador.lista_roles"))
 
 
-@administrador.route('/usuariosroles')
+@administrador.route('/usuroles')
 @login_required
 def lista_usuariorol():
     chequeo_admin()
@@ -108,12 +108,12 @@ def asigna_usuariorol(id):
 
     usuario = Usuario.query.get_or_404(id)
 
- 
-    
+
+
     form= UsuarioAsignaForm(obj=usuario)
     if form.validate_on_submit():
         usuario.role=form.role.data
-        
+
         db.session.add(usuario)
         db.session.commit()
 
@@ -128,7 +128,7 @@ def asigna_usuariorol(id):
         flash("Se asisgno el rol correctamente!!!")
 
         return redirect(url_for("administrador.lista_usuariorol"))
-    
+
     return render_template('administrador/usuariosroles/usuariorolasigna.html',usuario=usuario,form=form,title="Asignar Rol")
 
 
@@ -168,7 +168,7 @@ def edita_usuario(id):
     # form.is_admin.data = usuario.is_admin
     # form.id_telegram.data = usuario.id_telegram
     return render_template('administrador/usuarios/usuario.html',crear_usuario=crear_usuario,form=form,title="Editar Usuario" )
-    
+
 
 @administrador.route('/usuarios/crear', methods=['GET', 'POST'])
 @login_required
@@ -188,7 +188,7 @@ def crear_usuario():
         db.session.add(usuario)
         db.session.commit()
         #NOtifico al usuario creado
-        html = render_template('template_mail/mail_crea_usu.html',nombre=form.nombre.data,contraseña=form.password.data)
+        html = render_template('template_mail/mail_crea_usu.html',nombre=form.nombre.data,usuario=form.username.data,contraseña=form.password.data)
         send_email(subject='Creacion de Usuario',
                         sender=current_app.config['DONT_REPLY_FROM_EMAIL'],
                         recipients=[form.email.data,],
@@ -197,7 +197,7 @@ def crear_usuario():
 
         flash("Se creo un Usuario correctamente!!!")
         return redirect(url_for('administrador.lista_usuarios'))
-    
+
     if len(form.errors)>0:
         errores=""
         for error in form.errors:
@@ -232,42 +232,42 @@ def lista_medio_notificaciones():
 @login_required
 def medio_notificacion(id):
     chequeo_admin()
-    
+
     listausuarios= Usuario.query.all()
     usuarios=[]
-    
+
     for usu in listausuarios:
 
         result= UsuarioNotificacion.query.filter_by(medionotificacion_id=id).filter_by(usuario_id=usu.id).first()
         if not result:
             usuarios.append(usu)
-        
 
-    usuariomedio=UsuarioNotificacion.query.filter_by(medionotificacion_id=id).all()   
+
+    usuariomedio=UsuarioNotificacion.query.filter_by(medionotificacion_id=id).all()
     #usuarios que estan relacionados con el medio seleccionado
     mediousuario=[]
-    
+
     for user in usuariomedio:
         usu=Usuario.query.filter_by(id=user.usuario_id).first()
         mediousuario.append([usu.username,usu.email,user.id,id])
         #mediousuario.append(Usuario.query.filter_by(id=user.usuario_id).first())
-        
+
 
     form=UsuarioMedioForm(idmedio=id)
-    title=MedioNotificacion.query.filter_by(id=id).first().name 
+    title=MedioNotificacion.query.filter_by(id=id).first().name
     return render_template('administrador/medionotificaciones/medionotificacion.html',form=form,usuarios=usuarios,mediousuario=mediousuario,title=title)
 
 @administrador.route('/medionotificaciones/asignausuariomedio', methods=['POST'])
 @login_required
 def usuario_medio_notificacion():
     chequeo_admin()
-    
+
     form=UsuarioMedioForm(request.form)
     if form.validate_on_submit():
         usuariomedio = UsuarioNotificacion(usuario_id=form.iduser.data, medionotificacion_id =form.idmedio.data)
         db.session.add(usuariomedio)
         db.session.commit()
-    
+
     usu=Usuario.query.filter_by(id=form.iduser.data).first()
     medio=MedioNotificacion.query.filter_by(id=form.idmedio.data).first().name
     if (medio=="Telegram"):
@@ -285,7 +285,7 @@ def usuario_medio_notificacion():
                         text_body=f'Hola {usu}, se te agrego al grupo que recibira notificaciones mediante Correo',
                         html_body=html)
 
-    
+
     flash('Se agrego correctamente el Usuario!!!')
     return redirect(url_for('administrador.medio_notificacion',id=form.idmedio.data))
 
@@ -296,12 +296,12 @@ def elimina_usuario_medio(id,idmedio):
 
     usuariomedio= UsuarioNotificacion.query.get_or_404(id)
     db.session.delete(usuariomedio)
-    
+
     if idmedio==2:
 
         usu= Usuario.query.get_or_404(usuariomedio.usuario_id)
         usu.id_telegram = None
-    
+
     db.session.commit()
 
     flash('Se quito correctamente el Usuario de este Medio')

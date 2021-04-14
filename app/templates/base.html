@@ -29,16 +29,16 @@
 
   </div>
   <nav class="navbar navbar-expand-md navbar-dark bg-primary pl-md-5 pr-md-5">
-    <a class="navbar-brand" href="#"><img id="favi" src="{{ url_for('static', filename = 'img/favicon.ico') }}" alt="" style="width:3vh ;color:white"> Vi-SegurityIoT</a>
+    <a class="navbar-brand" href="{{ url_for('home.homepage') }}"><img id="favi" src="{{ url_for('static', filename = 'img/favicon.ico') }}" alt="" style="width:3vh ;color:white"> Vi-SegurityIoT</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="{{ url_for('home.homepage') }}">Home<span class="sr-only">(current)</span></a>
-        </li>
+        <!--<li class="nav-item active">
+          <a class="nav-link" href="{{ url_for('home.homepage') }}">Pagina Principal<span class="sr-only">(current)</span></a>
+        </li>-->
         {% if current_user.is_authenticated %}
 
           {% if current_user.is_admin %}
@@ -48,7 +48,7 @@
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="{{ url_for('administrador.lista_usuarios') }}">Usuarios</a>
                 <!-- <a class="dropdown-item" href="{{ url_for('administrador.lista_roles') }}">Roles</a> -->
-                <a class="dropdown-item" href="{{ url_for('administrador.lista_usuariorol') }}">Usuarios/Roles</a>
+                <a class="dropdown-item" href="{{ url_for('administrador.lista_usuariorol') }}">Asisgnacion de Roles</a>
               </div>
             </li>
             <li class="nav-item dropdown">
@@ -56,29 +56,22 @@
                 aria-expanded="false">Vigilancia/Reconocimineto</a>
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="{{ url_for('videostream.funciones') }}">Administrar Funcion</a>
-                <a class="dropdown-item" href="{{ url_for('videostream.lista_eventos') }}">Ver Eventos</a>
+
                 <a class="dropdown-item" href="{{ url_for('administrador.lista_medio_notificaciones') }}">Medio de Notificacion</a>
               </div>
             </li>
 
-          {% else %}
 
-             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                aria-expanded="false">Vigilancia/Reconocimineto</a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ url_for('videostream.lista_eventos') }}">Ver Eventos</a>
-              </div>
-            </li>
-            
+
             {% endif %}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                aria-expanded="false">Camaras</a>
+                aria-expanded="false">Camaras/Eventos</a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ url_for('videostream.stream',id_cam='porton') }}">Porton</a>
-                <a class="dropdown-item" href="{{ url_for('videostream.stream',id_cam='frente') }}">Frente</a>
-                <a class="dropdown-item" href="{{ url_for('videostream.stream',id_cam='entrada principal') }}">Entrada Principal</a>
+                <a class="dropdown-item" href="{{ url_for('videostream.lista_eventos') }}">Ver Eventos</a>
+                <a class="dropdown-item" href="{{ url_for('videostream.stream',id_cam='porton') }}">Camara-Porton</a>
+                <a class="dropdown-item" href="{{ url_for('videostream.stream',id_cam='frente') }}">Camara-Frente</a>
+                <a class="dropdown-item" href="{{ url_for('videostream.stream',id_cam='entrada principal') }}">Camara-Entrada Principal</a>
               </div>
             </li>
 
@@ -106,7 +99,7 @@
 
           <!-- <li class="nav-item">
             <a class="nav-link" href="{{ url_for('auth.register') }}">Registrarse</a>
-          </li> -->
+          </li> -->navbar-nav mr-auto
           <li class="nav-item">
 
             <a class="nav-link" href="{{ url_for('auth.login') }}"><i class="fa fa-user"></i> Iniciar Sesion</a>
@@ -126,6 +119,22 @@
     <script>
 
       $(window).on('load', function () {
+
+         $(".navbar-nav.mr-auto a").each(function (a) {
+            //alert($(this).attr("href"));
+            if (window.location.href.indexOf($(this).attr("href")) > -1) {
+                if ($(this).hasClass("dropdown-item")) {
+
+                    $(".navbar-nav.mr-auto li.nav-item").removeClass("active");
+
+                    $(this).addClass("text-white").css("background-color","#39898c").closest(".nav-item").addClass("active");
+
+                } else {
+                    $(this).css("color", "white");
+                };
+
+            };
+        });
 
         $('#loader').delay(500).fadeOut('fast');
 

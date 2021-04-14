@@ -47,26 +47,26 @@
 
             <div class="jumbotron">
               <h2>Usuarios</h2>
-              <p class="lead">Jumbo helper text</p>
+              <p class="lead">Al usuario que seleccione para agregar se le enviara un correo informando de lo mismo.</p>
               <form action="{{ url_for('administrador.usuario_medio_notificacion') }}" method="post">
-                {{ form.csrf_token }} 
+                {{ form.csrf_token }}
                   <input type="text" value="{{ form.idmedio.data }}" name="idmedio" hidden>
 
                 <div class="form-group">
-                  <label for="">Usuarios:</label>
+                  <label for="">Usuario:</label>
                   <div class="col col-6 offset-3">
                     <select class="form-control" name="iduser" value="{{ form.iduser.data }}">
-                      
-                      {% if usuarios %} 
+
+                      {% if usuarios %}
                       <option value="">Seleccione un Usuario</option>
                       {% for user in usuarios %}
                       <option value="{{user.id}}">{{user.username}}</option>
                       {% endfor %}
                       {% else %}
                       <option value="">No hay usuarios</option>
-                      
+
                       {% endif %}
-                     
+
                     </select>
                   </div>
                 </div>

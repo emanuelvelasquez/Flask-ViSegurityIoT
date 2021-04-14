@@ -15,7 +15,7 @@ def register():
     Handle requests to the /register route
     Add an employee to the database through the registration form
     """
-    
+
     form = RegistroForm()
     if form.validate_on_submit():
         usuario = Usuario(email=form.email.data,
@@ -31,9 +31,9 @@ def register():
 
         # redirect to the login page
         return redirect(url_for('auth.login'))
-    
-    
-    
+
+
+
     # load registration template
     return render_template('auth/registro.html', form=form, title='Registro')
 
@@ -43,24 +43,24 @@ def login():
 
     form = LoginForm()
     if form.validate_on_submit():
-        usuario = Usuario.query.filter_by(email=form.email.data).first()
+        usuario = Usuario.query.filter_by(username=form.usuario.data).first()
         if usuario is not None and usuario.verify_password(form.password.data):
             login_user(usuario)
-            
+
             if usuario.is_admin:
                 return redirect(url_for('home.admin_dashboard'))
             else:
                 return redirect(url_for('home.dashboard'))
         else:
             flash('Email o Contraseña Invalida')
-    
+
     return render_template('auth/login.html',form=form,title='Inicio de Sesion')
 
 
 @auth.route('/logout')
 @login_required
 def logout():
-   
+
     logout_user()
     flash('Se cerro Sesion con exito!!!')
 

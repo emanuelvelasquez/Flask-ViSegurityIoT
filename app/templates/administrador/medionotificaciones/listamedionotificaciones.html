@@ -10,8 +10,8 @@
         <br/>
         {{ utils.flashed_messages() }}
         <br/>
-        
-        <h1 style="text-align:center;">Medio - Usuarios</h1>
+
+        <h1 style="text-align:center;">Medio de Notificación - Usuarios</h1>
         {% if medionotificacion %}
           <hr class="intro-divider">
           <div class="center">
@@ -28,9 +28,9 @@
                 <tr>
                   <td class="text-center"> {{ medio.name }} </td>
                   <td class="text-center"> {{ medio.description }} </td>
-                  <td class="text-center"> 
+                  <td class="text-center">
                     <a class="btn btn-primary" href="{{ url_for('administrador.medio_notificacion', id=medio.id) }}">
-                        <i class="fa fa-pencil"> </i> Ver Usuarios
+                        <i class="fa fa-pencil"> </i> Edicion Usuarios
                     </a>
                   </td>
                 </tr>
@@ -44,7 +44,7 @@
             <h3> No hay Medio de Notificacion Creados </h3>
             <hr class="intro-divider">
         {% endif %}
-          
+
         </div>
       </div>
     </div>

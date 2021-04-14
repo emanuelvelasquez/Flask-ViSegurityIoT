@@ -13,7 +13,7 @@ class RoleForm(FlaskForm):
     submit = SubmitField("Guardar")
 
 class UsuarioAsignaForm(FlaskForm):
-    role = QuerySelectField(query_factory=lambda: Role.query.all(),
+    role = QuerySelectField('Rol',query_factory=lambda: Role.query.all(),
                             get_label="name")
 
     submit = SubmitField("Guardar")
@@ -22,8 +22,8 @@ class UsuarioForm(FlaskForm):
     """
     Formulario de Usuario
     """
-    
-    username = StringField('Nombre de Usuario', validators=[DataRequired()])
+
+    username = StringField('Usuario', validators=[DataRequired()])
     nombre = StringField('Nombre', validators=[DataRequired()])
     apellido = StringField('Apellido', validators=[DataRequired()])
     email = StringField('E-mail', validators=[DataRequired(), Email()])
@@ -44,7 +44,7 @@ class UsuarioEditaForm(FlaskForm):
     Formulario de Usuario
     """
     email = StringField('E-mail', validators=[DataRequired(), Email()])
-    username = StringField('Nombre de Usuario', validators=[DataRequired()])
+    username = StringField('Usuario', validators=[DataRequired()])
     nombre = StringField('Nombre', validators=[DataRequired()])
     apellido = StringField('Apellido', validators=[DataRequired()])
     # is_admin = BooleanField('Administrador')
