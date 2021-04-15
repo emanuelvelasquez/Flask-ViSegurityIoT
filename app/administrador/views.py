@@ -117,7 +117,7 @@ def asigna_usuariorol(id):
         db.session.add(usuario)
         db.session.commit()
 
-        usu = Usuario.query.get_or_404(id)
+        usu = UsuarioNotificacion.query.get_or_404(usu)
         formi = UsuarioEditaForm(objet=usu)
 
         if form.role.data.id==1:
@@ -211,6 +211,11 @@ def crear_usuario():
 @login_required
 def elimina_usuario(id):
     chequeo_admin()
+    medios = UsuarioNotificacion.query.filter_by(usuario_id=id)
+    
+    for mediousu in medios:
+        db.session.delete(mediousu)
+
     usuario=Usuario.query.get_or_404(id)
 
     db.session.delete(usuario)
