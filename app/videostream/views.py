@@ -57,7 +57,6 @@ def iniciar_fin(inicia):
             return redirect(url_for('videostream.funciones'))
 
         except Exception as e:
-            flash(e.message)
             abort(500)
 
 
