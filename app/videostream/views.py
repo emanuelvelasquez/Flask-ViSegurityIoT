@@ -34,11 +34,11 @@ def funciones():
     return render_template("videostream/funcion.html", funcion=funcion, form=form, title="Administrar Tarea")
 
 
-@videostream.route('/iniciarfin/<int:inicia>')
+@videostream.route('/iniciarfin/<string:inicia>')
 @login_required
 def iniciar_fin(inicia):
     hecho = True
-
+    
     while hecho:
         try:
             chequeo_admin()
