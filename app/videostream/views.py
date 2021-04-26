@@ -48,9 +48,11 @@ def iniciar_fin(inicia):
             contra=Configuraciones.query.filter_by(nombre='pass-ngrok').first().config
             
             result = requests.post(link_ngrok + '/reconocimiento/' + inicia)#,auth=HTTPBasicAuth(usu,contra))
-           
+            mensaje='Se Inicio correctamente la funcion Reconocimiento!!!'
+            if inicia=='False':
+                mensaje='Se Detuvo correctamente la funcion Reconocimiento!!!'
             hecho=False
-            flash(result.msg)
+            flash(mensaje)
             return redirect(url_for('videostream.funciones'))
 
         except Exception as e:
