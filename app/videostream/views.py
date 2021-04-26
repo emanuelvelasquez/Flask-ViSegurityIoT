@@ -53,7 +53,7 @@ def iniciar_fin(inicia):
 
             db.session.commit()
             hecho=False
-            flash(result['msg'])
+            flash(result.msg)
             return redirect(url_for('videostream.funciones'))
 
         except Exception as e:
