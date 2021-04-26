@@ -43,39 +43,17 @@ def iniciar_fin(inicia):
         try:
             chequeo_admin()
             funcion = Funciones.query.get_or_404(1)
-            link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config + '/reconocimiento/'
+            link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config 
             usu=Configuraciones.query.filter_by(nombre='user-ngrok').first().config
             contra=Configuraciones.query.filter_by(nombre='pass-ngrok').first().config
 
-            if inicia == "True":
-                funcion.corriendo = 1
-                
-                inicia= 'true'
-                    #'usu_telegram':[]
-                
-                # Usuario_Telegram = UsuarioNotificacion.query.filter_by(medionotificacion_id=2)
-                # for i in Usuario_Telegram:
-                #     usu = Usuario.query.get_or_404(i.usuario_id)
-                #     if usu.id_telegram is not None and usu.id_telegram != '':
-
-                #         i=data['usu_telegram'].append(dict(id_telegram=usu.id_telegram))
-
-
-                msg = 'Se Inicio el Reconocimiento de Objetos!!!'
-
-            else:
-                funcion.corriendo = 0
-                inicia= 'true'
-
-                msg = 'Se Detuvo el Reconocimiento de Objetos!!!'
-
-            result = requests.post(link_ngrok+inicia)#,auth=HTTPBasicAuth(usu,contra))
+            result = requests.post(link_ngrok + '/reconocimiento/' + inicia)#,auth=HTTPBasicAuth(usu,contra))
             if result.status_code != 200:
                 abort(result.status_code)
 
             db.session.commit()
             hecho=False
-            flash(msg)
+            flash(result['msg'])
             return redirect(url_for('videostream.funciones'))
 
         except Exception as e:
