@@ -34,7 +34,7 @@ def funciones():
     return render_template("videostream/funcion.html", funcion=funcion, form=form, title="Administrar Tarea")
 
 
-@videostream.route('/iniciarfin/<string:inicia>')
+@videostream.route('/iniciarfin/<int:inicia>')
 @login_required
 def iniciar_fin(inicia):
     hecho = True
@@ -46,7 +46,7 @@ def iniciar_fin(inicia):
             link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config
             usu=Configuraciones.query.filter_by(nombre='user-ngrok').first().config
             contra=Configuraciones.query.filter_by(nombre='pass-ngrok').first().config
-
+            
             result = requests.post(link_ngrok + '/reconocimiento/' + inicia)#,auth=HTTPBasicAuth(usu,contra))
             if result.status_code != 200:
                 abort(result.status_code)
