@@ -51,7 +51,6 @@ def iniciar_fin(inicia):
             if result.status_code != 200:
                 abort(result.status_code)
 
-            db.session.commit()
             hecho=False
             flash(result.msg)
             return redirect(url_for('videostream.funciones'))
