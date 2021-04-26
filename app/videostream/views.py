@@ -43,7 +43,7 @@ def iniciar_fin(inicia):
         try:
             chequeo_admin()
             funcion = Funciones.query.get_or_404(1)
-            link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config 
+            link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config
             usu=Configuraciones.query.filter_by(nombre='user-ngrok').first().config
             contra=Configuraciones.query.filter_by(nombre='pass-ngrok').first().config
 
@@ -57,6 +57,7 @@ def iniciar_fin(inicia):
             return redirect(url_for('videostream.funciones'))
 
         except Exception as e:
+            #mensaje de error
             abort(500)
 
 
