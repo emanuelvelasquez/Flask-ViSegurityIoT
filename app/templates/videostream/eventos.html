@@ -112,23 +112,29 @@ Lista de Eventos
         </div>
     </div>
 </div>
-<script>
+<script type=text/javascript>
+    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+
     function cargaimg(id) {
-       
-        $.ajax({
-            url: '/videostream/get_imagen',
-            data: JSON.stringify({ id: id}),
-            contentType: 'application/json;charset=UTF-8',
-            type: 'GET',
-            success: function (response) {
-                src = 'data:image/png;base64,' + response;
-                //$("#title").html(cam + " - " + hora);
-                // $("#CaptchaImg").attr("src", src);
-                // $("#title").html(cam + " - " + hora);
-            },
+        $.getJSON($SCRIPT_ROOT +'/videostream/get_imagen',
+            { id: id}
+      , function(data) {
+        alert(data);
+      });
+        // $.ajax({
+        //     url: $SCRIPT_ROOT +'/videostream/get_imagen',
+        //     data: JSON.stringify({ id: id}),
+        //     contentType: 'application/json;charset=UTF-8',
+        //     type: 'GET',
+        //     success: function (response) {
+        //         src = 'data:image/png;base64,' + response;
+        //         //$("#title").html(cam + " - " + hora);
+        //         // $("#CaptchaImg").attr("src", src);
+        //         // $("#title").html(cam + " - " + hora);
+        //     },
 
 
-        });
+        // });
 
     };
     $(document).ready(function () {
