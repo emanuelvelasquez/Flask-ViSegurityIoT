@@ -51,7 +51,7 @@ def iniciar_fin(inicia):
             
             hecho=False
             data = request.get(link_ngrok + '/evento/'+ id ).text
-            flash(data)
+            flash(json.dumps(data))
             #flash(json.loads(result)['msg'])
             return redirect(url_for('videostream.funciones'))
 
