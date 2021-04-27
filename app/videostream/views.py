@@ -52,8 +52,8 @@ def iniciar_fin(inicia):
             if inicia=='False':
                 mensaje='Se Detuvo correctamente la funcion Reconocimiento!!!'
             hecho=False
-            data=json.load(result)
-            flash(data['msg'])
+            
+            flash(mensaje)
             return redirect(url_for('videostream.funciones'))
 
         except Exception as e:
