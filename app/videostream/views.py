@@ -1,4 +1,4 @@
-from flask import render_template, abort, Response, Flask, redirect, url_for, flash, request, current_app
+from flask import render_template, abort, Response, Flask, redirect, url_for, flash, request, current_app,jsonify
 from flask_login import login_required, current_user
 from . import videostream
 from ..models import Funciones, Eventos, Configuraciones, Usuario, UsuarioNotificacion
@@ -100,13 +100,13 @@ def lista_eventos():
 #     data = request.get(link_ngrok + '/evento/'+ id )
 
 #     return Response(data)
-@videostream.route('/evento/<int:id>')
+@videostream.route('/evento/<int:id>',methods=['GET', 'POST'])
 def evento(id):
     #id = json.loads(request.data)["id"]
 
     link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config
     data = request.get(link_ngrok + '/evento/'+ id ).text
 
-    return Response(data)
+    return jsonify(data)
 
 

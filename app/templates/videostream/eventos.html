@@ -116,11 +116,21 @@ Lista de Eventos
     $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 
     function cargaimg(id) {
-        $.get('/videostream/evento',
-        { id: id},
-        function(responde){
-        alert(responde);
-    });
+        // $.get('/videostream/evento',
+        // { id: id},
+        // function(responde){
+        // alert(responde);
+        // });
+        $.ajax({
+            url:"evento", //the page containing python script
+            type: "get", //request type,
+            dataType: 'json',
+            data: {id: id},
+            success:function(result){
+                alert(result);
+            }
+        });
+   
         // $.ajax({
         //     url: $SCRIPT_ROOT +'/videostream/get_imagen',
         //     data: JSON.stringify({ id: id}),
