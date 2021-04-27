@@ -100,8 +100,8 @@ def evento():
     id =request.form.get('id')
 
     link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config
-    data = request.get(link_ngrok + '/evento/'+ id )
+    data = request.get(link_ngrok + '/evento/'+ id ).text
 
-    return jsonify({'abc': 'registration unsuccessful'})
+    return Response(data)
 
 
