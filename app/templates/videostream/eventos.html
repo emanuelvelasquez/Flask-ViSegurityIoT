@@ -117,12 +117,12 @@ Lista de Eventos
        
         $.ajax({
             url: '/videostream/get_imagen',
-            data: { id: id},
-            //contentType: 'application/json;charset=UTF-8',
-            type: 'GET',
+            data: JSON.stringify({ id: id}),
+            contentType: 'application/json;charset=UTF-8',
+            type: 'POST',
             success: function (response) {
                 src = 'data:image/png;base64,' + response;
-                // $("#title").html(cam + " - " + hora);
+                //$("#title").html(cam + " - " + hora);
                 // $("#CaptchaImg").attr("src", src);
                 // $("#title").html(cam + " - " + hora);
             },
