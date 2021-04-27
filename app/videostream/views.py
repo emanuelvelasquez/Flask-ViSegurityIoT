@@ -92,7 +92,7 @@ def lista_eventos():
 
     return render_template('videostream/eventos.html',eventos=eventos, title='Listado de Eventos')
 
-@videostream.route('/getevento/<int:id>', methods=['GET'])
+@videostream.route('/getevento/<int:id>')
 def get_imagen(id):
     #id = json.loads(request.data)["id"]
 
