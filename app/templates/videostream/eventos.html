@@ -40,8 +40,6 @@ Lista de Eventos
                     <table class="table table-striped table-bordered" >
                         <thead>
                             <tr class="text-center">
-                              
-
                                 <th width="20%"> # </th>
                                 <th width="20%"> Evento </th>
                                 <th width="20%"> Hora </th>
@@ -51,7 +49,7 @@ Lista de Eventos
                         <tbody>
                             {% for evento in eventos %}
                             <tr>
-                               
+
                                 <td>
                                     {{count.value}}
                                 </td>
@@ -64,7 +62,7 @@ Lista de Eventos
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        onclick="cargaimg('{{ evento.id }}','{{ evento.evento }}','{{ evento.hora }}')"
+                                        onclick="cargaimg('{{ evento.path }}','{{ evento.evento }}','{{ evento.hora }}')"
                                         data-target="#myModal">
                                         Ver
                                     </button>
@@ -112,16 +110,14 @@ Lista de Eventos
         </div>
     </div>
 </div>
-<script type=text/javascript>
-  
-    function cargaimg(id,cam,hora) {
-
+<script>
+    function cargaimg(path, cam, hora) {
         $("#title").html(cam + " - " + hora);
         $.ajax({
-            url: '/evento',
-            data: JSON.stringify({ id: id}),
+            url: '/videostream/get_imagen',
+            data: JSON.stringify({ path: path}),
             contentType: 'application/json;charset=UTF-8',
-            type: 'GET',
+            type: 'POST',
             success: function (response) {
                 src = 'data:image/png;base64,' + response;
 
@@ -131,7 +127,7 @@ Lista de Eventos
 
 
         });
-      
+
     };
     $(document).ready(function () {
 
