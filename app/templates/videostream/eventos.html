@@ -64,7 +64,7 @@ Lista de Eventos
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        onclick="cargaimg('{{ evento.id }}')"
+                                        onclick="cargaimg('{{ evento.id }}','{{ evento.evento }}','{{ evento.hora }}')"
                                         data-target="#myModal">
                                         Ver
                                     </button>
@@ -114,37 +114,24 @@ Lista de Eventos
 </div>
 <script type=text/javascript>
   
-    function cargaimg(id) {
-        // $.get('/videostream/evento',
-        // { id: id},
-        // function(responde){
-        // alert(responde);
-        // });
+    function cargaimg(id,cam,hora) {
+
+        $("#title").html(cam + " - " + hora);
         $.ajax({
-            url:"evento", //the page containing python script
-            type: "get", //request type,
-            dataType: 'json',
-            data: {id: id},
-            success:function(result){
-                alert(result);
-            }
+            url: '/evento',
+            data: JSON.stringify({ id: id}),
+            contentType: 'application/json;charset=UTF-8',
+            type: 'POST',
+            success: function (response) {
+                src = 'data:image/png;base64,' + response;
+
+                $("#CaptchaImg").attr("src", src);
+                $("#title").html(cam + " - " + hora);
+            },
+
+
         });
-   
-        // $.ajax({
-        //     url: $SCRIPT_ROOT +'/videostream/get_imagen',
-        //     data: JSON.stringify({ id: id}),
-        //     contentType: 'application/json;charset=UTF-8',
-        //     type: 'GET',
-        //     success: function (response) {
-        //         src = 'data:image/png;base64,' + response;
-        //         //$("#title").html(cam + " - " + hora);
-        //         // $("#CaptchaImg").attr("src", src);
-        //         // $("#title").html(cam + " - " + hora);
-        //     },
-
-
-        // });
-
+      
     };
     $(document).ready(function () {
 

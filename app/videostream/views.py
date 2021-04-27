@@ -50,9 +50,8 @@ def iniciar_fin(inicia):
             result = requests.post(link_ngrok + '/reconocimiento/' + inicia).text#,auth=HTTPBasicAuth(usu,contra))
             
             hecho=False
-            data = request.get(link_ngrok + '/evento/'+ id ).text
-            flash(json.loads(data.text)['img'])
-            #flash(json.loads(result)['msg'])
+           
+            flash(json.loads(result)['msg'])
             return redirect(url_for('videostream.funciones'))
 
         except Exception as e:
@@ -95,14 +94,14 @@ def lista_eventos():
 
 
 
-@videostream.route('/evento/',methods=['GET', 'POST'])
+@videostream.route('/evento/', methods=['POST'])
 def evento():
     #id = json.loads(request.data)["id"]
-    id =request.form.get('id')
-
+    id = json.loads(request.data)["id"]
+    
     link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config
     data = request.get(link_ngrok + '/evento/'+ id ).text
 
-    return Response(data)
+    return Response(json.loads(data)['img'])
 
 
