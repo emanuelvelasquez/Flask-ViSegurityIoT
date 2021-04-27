@@ -119,7 +119,7 @@ Lista de Eventos
             url: '/videostream/get_imagen',
             data: JSON.stringify({ id: id}),
             contentType: 'application/json;charset=UTF-8',
-            type: 'POST',
+            type: 'GET',
             success: function (response) {
                 src = 'data:image/png;base64,' + response;
                 // $("#title").html(cam + " - " + hora);
