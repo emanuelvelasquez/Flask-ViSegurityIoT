@@ -99,7 +99,7 @@ def get_imagen():
     paths = json.loads(request.data)["path"]
 
     linkngrok= Configuraciones.query.filter_by(nombre='ngrok').first().config
-    response = requests.get(linkngrok + "/imagen", data=json.dumps(paths),headers = {'content-type': 'application/json'})
+    response = requests.get(linkngrok + "/evento", data=json.dumps(paths),headers = {'content-type': 'application/json'})
 
     return Response(response)
 
