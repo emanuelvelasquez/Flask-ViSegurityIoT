@@ -94,14 +94,13 @@ def lista_eventos():
 
 
 
-@videostream.route('/evento/', methods=['POST'])
-def evento():
-    #id = json.loads(request.data)["id"]
+@videostream.route('/evento', methods=['GET'])
+def get_imagen():
     id = json.loads(request.data)["id"]
+
+    linkngrok= Configuraciones.query.filter_by(nombre='ngrok').first().config
     
-    link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config
-    data = request.get(link_ngrok + '/evento/'+ id ).text
+    response = requests.get(linkngrok + "/imagen/"+id)
 
-    return Response(json.loads(data)['img'])
-
+    return Response(response)
 
