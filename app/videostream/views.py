@@ -92,12 +92,12 @@ def lista_eventos():
 
     return render_template('videostream/eventos.html',eventos=eventos, title='Listado de Eventos')
 
-@videostream.route('/videostream/get_imagen', methods=['GET'])
-def get_imagen():
-    id = json.loads(request.data)["id"]
+@videostream.route('/get_imagen/<int:id>', methods=['GET'])
+def get_imagen(id):
+    #id = json.loads(request.data)["id"]
 
     link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config
-    data = json.loads(request.get(link_ngrok + '/evento/'+ id ).text)
+    data = request.get(link_ngrok + '/evento/'+ id ).text
 
     return Response(data)
 
