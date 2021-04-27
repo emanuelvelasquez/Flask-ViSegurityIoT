@@ -105,7 +105,7 @@ def evento(id):
     #id = json.loads(request.data)["id"]
 
     link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config
-    data = request.get(link_ngrok + '/evento/'+ id )
+    data = request.get(link_ngrok + '/evento/'+ id ).text
 
     return Response(data)
 

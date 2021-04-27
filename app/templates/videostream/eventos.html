@@ -116,11 +116,11 @@ Lista de Eventos
     $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 
     function cargaimg(id) {
-        $.getJSON($SCRIPT_ROOT +'/videostream/get_imagen',
-            { id: id}
-      , function(data) {
-        alert(data);
-      });
+        $.get('/videostream/evento',
+        { id: id},
+        function(responde){
+        alert(responde)
+    });
         // $.ajax({
         //     url: $SCRIPT_ROOT +'/videostream/get_imagen',
         //     data: JSON.stringify({ id: id}),
