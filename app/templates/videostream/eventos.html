@@ -37,6 +37,11 @@ Lista de Eventos
                 {% if eventos %}
                 <hr class="intro-divider">
                 <div class="center">
+                    <p id="date_filter">
+                        <span id="date-label-from" class="date-label">From: </span><input class="date_range_filter date" type="text" id="datepicker_from" />
+                        
+                    </p>
+                    <br>
                     <table class="table table-striped table-bordered" >
                         <thead>
                             <tr class="text-center">
@@ -129,9 +134,30 @@ Lista de Eventos
         });
 
     };
+    // Date range filter
+    minDateFilter = "";
+    maxDateFilter = "";
+
+    $.fn.dataTableExt.afnFiltering.push(
+    function(oSettings, aData, iDataIndex) {
+        if (typeof aData._date == 'undefined') {
+        aData._date = new Date(aData[0]).getTime();
+        }
+
+        if (minDateFilter && !isNaN(minDateFilter)) {
+        if (aData._date < minDateFilter) {
+            return false;
+        }
+        }
+
+        
+
+        return true;
+    }
+    );
     $(document).ready(function () {
 
-            $('table').DataTable({
+        var oTable=$('table').DataTable({
                 language: {
         "decimal": "",
         "emptyTable": "No hay información",
@@ -151,12 +177,30 @@ Lista de Eventos
             "next": "Siguiente",
             "previous": "Anterior"
         }
-    }
+         }
             });
+
+
+        
             $('#myModal').on('hidden.bs.modal', function (e) {
                 $("#CaptchaImg").attr("src", "../../static/img/loading.gif");
 
             });
+
+
+    $("#datepicker_from").datepicker({
+        showOn: "button",
+        buttonImage: "images/calendar.gif",
+        buttonImageOnly: false,
+        "onSelect": function(date) {
+        minDateFilter = new Date(date).getTime();
+        oTable.fnDraw();
+        }
+    }).keyup(function() {
+        minDateFilter = new Date(this.value).getTime();
+        oTable.fnDraw();
+    });
+            
     })
 </script>
 {% endblock %}
