@@ -47,7 +47,7 @@ Lista de Eventos
                             <tr class="text-center">
                                 <th width="20%"> # </th>
                                 <th width="20%"> Evento </th>
-                                <th width="20%"> Hora </th>
+                                <th width="20%"> Fecha/Hora </th>
                                 <th width="15%"> Ver Imagen</th>
                             </tr>
                         </thead>
@@ -134,27 +134,7 @@ Lista de Eventos
         });
 
     };
-    // Date range filter
-    minDateFilter = "";
-    maxDateFilter = "";
-
-    $.fn.dataTableExt.afnFiltering.push(
-    function(oSettings, aData, iDataIndex) {
-        if (typeof aData._date == 'undefined') {
-        aData._date = new Date(aData[0]).getTime();
-        }
-
-        if (minDateFilter && !isNaN(minDateFilter)) {
-        if (aData._date < minDateFilter) {
-            return false;
-        }
-        }
-
-        
-
-        return true;
-    }
-    );
+  
     $(document).ready(function () {
 
         var oTable=$('table').DataTable({
@@ -200,6 +180,28 @@ Lista de Eventos
         minDateFilter = new Date(this.value).getTime();
         oTable.fnDraw();
     });
+
+  // Date range filter
+  minDateFilter = "";
+    maxDateFilter = "";
+
+    $.fn.dataTableExt.afnFiltering.push(
+    function(oSettings, aData, iDataIndex) {
+        if (typeof aData._date == 'undefined') {
+        aData._date = new Date(aData[0]).getTime();
+        }
+
+        if (minDateFilter && !isNaN(minDateFilter)) {
+        if (aData._date < minDateFilter) {
+            return false;
+        }
+        }
+
+        
+
+        return true;
+    }
+    );
             
     })
 </script>
