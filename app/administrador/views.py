@@ -266,7 +266,7 @@ def medio_notificacion(id):
 @login_required
 def usuario_medio_notificacion():
     chequeo_admin()
-
+    usu=Usuario.query.filter_by(id=form.iduser.data).first()
     form=UsuarioMedioForm(request.form)
     if form.validate_on_submit():
 
@@ -275,13 +275,13 @@ def usuario_medio_notificacion():
         
         db.session.commit()
 
-    usu=Usuario.query.filter_by(id=form.iduser.data).first()
-    if usuariomedio.medionotificacion_id == 2:
+    
+        if usuariomedio.medionotificacion_id == 2:
 
-           
-        usu.id_telegram = form.idtelegram.data
-        
-        db.session.commit()
+            
+            usu.id_telegram = form.idtelegram.data
+            
+            db.session.commit()
 
     medio=MedioNotificacion.query.filter_by(id=form.idmedio.data).first().name
     if (medio=="Telegram"):
