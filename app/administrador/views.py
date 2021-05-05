@@ -279,10 +279,10 @@ def usuario_medio_notificacion():
     if usuariomedio.medionotificacion_id == 2:
 
            
-        user.id_telegram = form.idtelegram.data
+        usu.id_telegram = form.idtelegram.data
         
         db.session.commit()
-        
+
     medio=MedioNotificacion.query.filter_by(id=form.idmedio.data).first().name
     if (medio=="Telegram"):
         html = render_template('template_mail/mail_usuario_telegram.html',nombre=usu.nombre)
