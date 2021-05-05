@@ -266,8 +266,10 @@ def medio_notificacion(id):
 @login_required
 def usuario_medio_notificacion():
     chequeo_admin()
-    usu=Usuario.query.filter_by(id=form.iduser.data).first()
+    
     form=UsuarioMedioForm(request.form)
+    usu=Usuario.query.filter_by(id=form.iduser.data).first()
+    
     if form.validate_on_submit():
 
         usuariomedio = UsuarioNotificacion(usuario_id=form.iduser.data, medionotificacion_id =form.idmedio.data)
