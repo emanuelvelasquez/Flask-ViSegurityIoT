@@ -273,8 +273,8 @@ def usuario_medio_notificacion():
         db.session.add(usuariomedio)
         if form.idmedio.data == 2:
 
-            user= Usuario.query.filter_by(form.iduser.data).first()
-            user.id_telegram= form.idTelegram.data
+            user= Usuario.query.filter_by(id=form.iduser.data).first()
+            user.id_telegram= form.idtelegram.data
         
         db.session.commit()
 
