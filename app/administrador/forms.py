@@ -60,6 +60,7 @@ class MedioNotificacionForm(FlaskForm):
 class UsuarioMedioForm(FlaskForm):
     idmedio = StringField("idmedio",validators=[DataRequired()])
     iduser = StringField("Usuario", validators=[DataRequired()])
+    idTelegram = StringField("Id Telegram",validators=[DataRequired()])
     submit= SubmitField('Agregar')
 
 
