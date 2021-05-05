@@ -269,16 +269,20 @@ def usuario_medio_notificacion():
 
     form=UsuarioMedioForm(request.form)
     if form.validate_on_submit():
+
         usuariomedio = UsuarioNotificacion(usuario_id=form.iduser.data, medionotificacion_id =form.idmedio.data)
         db.session.add(usuariomedio)
-        if usuariomedio.medionotificacion_id == 2:
-
-            user= Usuario.query.filter_by(id=form.iduser.data).first()
-            user.id_telegram = form.idtelegram.data
         
         db.session.commit()
 
     usu=Usuario.query.filter_by(id=form.iduser.data).first()
+    if usuariomedio.medionotificacion_id == 2:
+
+           
+        user.id_telegram = form.idtelegram.data
+        
+        db.session.commit()
+        
     medio=MedioNotificacion.query.filter_by(id=form.idmedio.data).first().name
     if (medio=="Telegram"):
         html = render_template('template_mail/mail_usuario_telegram.html',nombre=usu.nombre)
