@@ -18,7 +18,7 @@ def chequeo_admin():
 def stream(id_cam):
 
     #link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config + '/videostream/' + id_cam
-    urlcam = Configuraciones.query.filter_by(descripcion='ngrok').first().config
+    urlcam = Configuraciones.query.filter_by(descripcion=id_cam).first().config
 
     return render_template('videostream/stream.html', link=urlcam, title=id_cam.upper())
 
