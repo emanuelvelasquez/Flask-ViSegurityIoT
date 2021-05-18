@@ -17,10 +17,10 @@ def chequeo_admin():
 @login_required
 def stream(id_cam):
 
-    link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config + '/videostream/' + id_cam
+    #link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config + '/videostream/' + id_cam
+    urlcam= Configuraciones.query.filter_by(descripcion=id_cam).config
 
-
-    return render_template('videostream/stream.html', link=link_ngrok, title=id_cam.upper())
+    return render_template('videostream/stream.html', link=urlcam, title=id_cam.upper())
 
 
 @videostream.route('/videostream/funciones')
@@ -42,12 +42,10 @@ def iniciar_fin(inicia):
     while hecho:
         try:
             chequeo_admin()
-            funcion = Funciones.query.get_or_404(1)
-            link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config
-            usu=Configuraciones.query.filter_by(nombre='user-ngrok').first().config
-            contra=Configuraciones.query.filter_by(nombre='pass-ngrok').first().config
             
-            result = requests.post(link_ngrok + '/reconocimiento/' + inicia).text#,auth=HTTPBasicAuth(usu,contra))
+            funcion = Funciones.query.get_or_404(1)
+            
+            result = requests.post(link_API + '/reconocimiento/' + inicia,auth=TOKEN_API).text#,auth=HTTPBasicAuth(usu,contra))
             
             hecho=False
            
