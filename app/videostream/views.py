@@ -48,7 +48,7 @@ def iniciar_fin(inicia):
         result = requests.post(linkngrok + '/reconocimiento/' + inicia#,auth=HTTPBasicAuth(usu,contra))
             
            
-        flash(json.loads(result)['msg'])
+        flash('Funcion Reconocimiento Iniciado')
         return redirect(url_for('videostream.funciones'))
 
     except Exception as e:
