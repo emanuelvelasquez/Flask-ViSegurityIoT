@@ -37,23 +37,26 @@ def funciones():
 @videostream.route('/iniciarfin/<string:inicia>')
 @login_required
 def iniciar_fin(inicia):
+    hecho = True
     
-
-    linkngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config
-    try:
-        chequeo_admin()
+    while hecho:
+        try:
+            chequeo_admin()
+            funcion = Funciones.query.get_or_404(1)
+            link_ngrok = Configuraciones.query.filter_by(nombre='ngrok').first().config
+            usu=Configuraciones.query.filter_by(nombre='user-ngrok').first().config
+            contra=Configuraciones.query.filter_by(nombre='pass-ngrok').first().config
             
-        funcion = Funciones.query.get_or_404(1)
+            result = requests.post(link_ngrok + '/reconocimiento/' + inicia).text#,auth=HTTPBasicAuth(usu,contra))
             
-        result = requests.post(linkngrok + '/reconocimiento/' + inicia#,auth=HTTPBasicAuth(usu,contra))
-            
+            hecho=False
            
-        flash('Funcion Reconocimiento Iniciado')
-        return redirect(url_for('videostream.funciones'))
+            flash(json.loads(result)['msg'])
+            return redirect(url_for('videostream.funciones'))
 
-    except Exception as e:
+        except Exception as e:
             #mensaje de error
-        abort(500)
+            abort(500)
 
 
 
